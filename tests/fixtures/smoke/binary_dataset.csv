@@ -1,0 +1,7 @@
+sequence_id,label,partition
+seq0,0,train
+seq1,0,train
+seq2,1,train
+seq3,1,train
+seq4,0,test
+seq5,1,test

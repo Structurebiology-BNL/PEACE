@@ -1,0 +1,85 @@
+data:
+  pretraining_csv_path: src/data/csv_dataset/fungtion_dataset.csv
+  finetuning_csv_path: src/data/csv_dataset/fungtion_dataset.csv
+  embedding_dir: src/data/embeddings/prott5_dropout_variants
+  mmap_dir: src/data/embeddings/prott5_dropout_variants_mmap
+  results_dir: results/prototype_ranking_two_stage_simple
+  use_mmap: true
+  label_config:
+    label_column: label
+    sequence_id_column: sequence_id
+features:
+  layer_idx: -1
+  normalize: true
+  pooling_type: mean
+hardware:
+  gpu_id: 0
+  random_seed: 42
+  deterministic: false
+  debug_logging: true
+model:
+  type: simple
+  input_dim: 1024
+  dropout_rate: 0.2
+  contrastive_dim: 1024
+  encoder_hidden_dim: 512
+output:
+  save_checkpoints: true
+  plot_training_curves: true
+training:
+  batch_size: 1024
+  num_folds: 5
+  threshold_method: youden
+  target_recall: 0.85
+  use_variants: true
+  variant_sampling:
+    enabled: true
+    num_variants: 8
+    always_include_original: true
+  pretraining:
+    num_epochs: 25
+    learning_rate: 0.00013572201214991436
+    weight_decay: 0.000984489843800881
+    warmup_epochs: 5
+    early_stopping_patience: 6
+    grad_clip_value: 2.0
+    contrastive_type: prototype
+    majority_class: 0
+    monitor_metric: loss
+    mode: min
+    prototype_loss_params:
+      temperature: 0.051785347190638195
+      eps_pos: 0.21457129629172478
+      eps_neg: 0.014765194686471667
+      prototype_weight: 1.0
+      unsupervised_weight: 1.0
+      prototype_update_strategy: ema
+      prototype_momentum: 0.954441664260603
+    lr_scheduler:
+      scheduler_type: cosine
+      eta_min: 1e-6
+  finetuning:
+    num_epochs: 100
+    learning_rate: 7.37200255442487e-05
+    weight_decay: 0.001687639552474696
+    warmup_epochs: 5
+    early_stopping_patience: 8
+    grad_clip_value: 2.0
+    contrastive_type: prototype_ranking
+    majority_class: 0
+    monitor_metric: auprc
+    mode: max
+    prototype_loss_params:
+      temperature: 0.051785347190638195
+      eps_pos: 0.21457129629172478
+      eps_neg: 0.014765194686471667
+      ranking_loss_type: bce
+      ranking_weight: 1.0
+      scoring_temperature: 0.34216505184629464
+      unsupervised_weight: 0.4153064265396889
+      prototype_weight: 1.0
+      prototype_update_strategy: warmup_freeze
+      prototype_momentum: 0.9688462594844762
+    lr_scheduler:
+      scheduler_type: cosine
+      eta_min: 1e-7

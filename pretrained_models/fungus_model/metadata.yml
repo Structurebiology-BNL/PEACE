@@ -1,0 +1,6 @@
+notebook:
+  default_threshold: 0.4641951620578766
+  threshold_method: youden
+  threshold_source: pooled_oof_predictions
+  recommended_runtime: gpu
+  description: Bundled fungi-only prototype model for the public Colab notebook

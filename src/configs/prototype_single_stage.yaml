@@ -1,0 +1,61 @@
+# Single-stage prototype contrastive training configuration.
+
+data:
+  csv_path: src/data/csv_dataset/fungtion_dataset.csv
+  embedding_dir: src/data/embeddings/prott5_dropout_variants_packed
+  results_dir: results/prototype_single_stage
+
+features:
+  normalize: true
+  pooling_type: mean
+
+model:
+  type: simple
+  input_dim: 1024
+  dropout_rate: 0.2
+  contrastive_dim: 1024
+  encoder_hidden_dim: 1024
+
+training:
+  batch_size: 1024
+  num_folds: 5
+  threshold_method: youden
+  target_recall: 0.85
+  num_epochs: 100
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  warmup_epochs: 5
+  early_stopping_patience: 6
+  grad_clip_value: 2.0
+  use_variants: true
+  variant_sampling:
+    enabled: true
+    num_variants: 4
+    always_include_original: true
+  contrastive_type: prototype_ranking
+  majority_class: 0
+  monitor_metric: auprc
+  mode: max
+  prototype_loss_params:
+    temperature: 0.07
+    eps_pos: 0.15
+    eps_neg: 0.03
+    bce_weight: 0.5
+    scoring_temperature: 0.1
+    unsupervised_weight: 0.5
+    prototype_weight: 1.0
+    prototype_update_strategy: warmup_freeze
+    prototype_momentum: 0.97
+  lr_scheduler:
+    scheduler_type: cosine
+    eta_min: 1e-7
+
+output:
+  save_checkpoints: false
+  plot_training_curves: true
+
+hardware:
+  gpu_id: 1
+  random_seed: 42
+  deterministic: false
+  debug_logging: true

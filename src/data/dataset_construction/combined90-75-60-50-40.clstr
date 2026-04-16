@@ -1,0 +1,1626 @@
+>Cluster 0
+0	1513aa, >tr|Q572K4|Q572K4_PHYIN... *
+>Cluster 1
+0	1491aa, >tr|Q572G7|Q572G7_PHYIN... *
+>Cluster 2
+0	1353aa, >tr|Q572I3|Q572I3_PHYIN... *
+>Cluster 3
+0	1222aa, >tr|A0A833T392|A0A833T392_PHYIN... *
+>Cluster 4
+0	1181aa, >tr|D0MWY7|D0MWY7_PHYIT... *
+>Cluster 5
+0	1155aa, >tr|Q572G9|Q572G9_PHYIN... *
+>Cluster 6
+0	1023aa, >tr|B8QRI7|B8QRI7_PHYIN... *
+>Cluster 7
+0	1009aa, >tr|Q572F2|Q572F2_PHYIN... *
+1	702aa, >tr|Q572E5|Q572E5_PHYIN... at 1.14e-141/786aa/36.896%
+>Cluster 8
+0	930aa, >tr|Q572J2|Q572J2_PHYIN... *
+>Cluster 9
+0	905aa, >tr|G4ZK77|G4ZK77_PHYSP... *
+>Cluster 10
+0	900aa, >tr|G5AC78|G5AC78_PHYSP... *
+1	175aa, >tr|G5A8K9|G5A8K9_PHYSP... at 3.11e-10/148aa/31.081%
+2	174aa, >2_NFIP_OFITP_sp|A0A411NN20.1|RL207_PHYCP... at 1.48e-24/142aa/41.549%
+>Cluster 11
+0	869aa, >Rsp3... *
+>Cluster 12
+0	852aa, >tr|D0NJ03|D0NJ03_PHYIT... *
+1	758aa, >tr|A0A329SD52|A0A329SD52_9STRA... at 6.03e-43/818aa/25.306%
+>Cluster 13
+0	847aa, >KEX1... *
+>Cluster 14
+0	842aa, >tr|Q572G5|Q572G5_PHYIN... *
+>Cluster 15
+0	820aa, >PGTG_10537.2... *
+>Cluster 16
+0	820aa, >PsCRN108... *
+1	750aa, >tr|D0NIZ9|D0NIZ9_PHYIT... at 8.34e-81/854aa/30.913%
+>Cluster 17
+0	814aa, >tr|A0A3F2YED1|A0A3F2YED1_BRELC... *
+1	589aa, >tr|G4Z2U5|G4Z2U5_PHYSP... at 1.75e-09/506aa/21.542%
+>Cluster 18
+0	789aa, >tr|A0A329RP10|A0A329RP10_9STRA... *
+1	229aa, >tr|A0A329RP74|A0A329RP74_9STRA... at 3.37e-09/250aa/26.800%
+>Cluster 19
+0	779aa, >tr|A0A329RJE2|A0A329RJE2_9STRA... *
+1	132aa, >tr|A0A329SYV6|A0A329SYV6_9STRA... at 9.46e-09/111aa/28.829%
+>Cluster 20
+0	773aa, >BSW13... *
+>Cluster 21
+0	768aa, >HUM3... *
+>Cluster 22
+0	768aa, >tr|G5A748|G5A748_PHYSP... *
+>Cluster 23
+0	760aa, >sp|D0NRS4|PSR2_PHYIT... *
+1	670aa, >RxLR... at 6.05e-175/630aa/45.556%
+2	504aa, >PsAvh163... at 2.14e-28/497aa/24.145%
+3	481aa, >tr|Q572K1|Q572K1_PHYIN... at 2.63e-21/471aa/25.053%
+4	392aa, >tr|G5A7U9|G5A7U9_PHYSP... at 1.70e-41/335aa/33.433%
+5	290aa, >tr|G4ZQ50|G4ZQ50_PHYSP... at 3.46e-24/232aa/31.034%
+>Cluster 24
+0	759aa, >tr|A0A0W8DBR7|A0A0W8DBR7_PHYNI... *
+1	281aa, >tr|D0MX97|D0MX97_PHYIT... at 2.45e-52/252aa/37.698%
+2	253aa, >FoeNEP1... at 1.42e-38/223aa/37.220%
+3	248aa, >tr|D0NEY6|D0NEY6_PHYIT... at 2.77e-49/226aa/42.035%
+4	246aa, >NEP1... at 5.91e-48/217aa/41.014%
+5	244aa, >Q0E7H7|PHI2342|Benep2... at 2.14e-47/216aa/42.593%
+6	234aa, >L7NCR0|PHI8061|Pc129892... at 2.39e-88/214aa/57.944%,5:234:6:237/76.29%
+7	237aa, >NIP1... at 2.39e-88/214aa/57.944%
+8	231aa, >MpNEP1_1... at 4.70e-42/192aa/43.750%
+9	180aa, >sp|A0A172M485|RLR19_PLAVT... at 2.92e-15/151aa/33.775%
+>Cluster 25
+0	754aa, >tr|A0A833SKW8|A0A833SKW8_PHYIN... *
+>Cluster 26
+0	744aa, >PGTG_16791... *
+>Cluster 27
+0	736aa, >N1S082... *
+>Cluster 28
+0	735aa, >tr|M4C0V5|M4C0V5_HYAAE... *
+>Cluster 29
+0	720aa, >sp|P0CV57|RL138_PLAVT... *
+1	517aa, >sp|P0CV36|RLR95_PLAVT... at 9.44e-66/442aa/35.294%
+2	506aa, >sp|P0CV55|RL134_PLAVT... at 1.66e-88/407aa/45.700%
+>Cluster 30
+0	714aa, >tr|D0NJH4|D0NJH4_PHYIT... *
+>Cluster 31
+0	709aa, >Apb73... *
+>Cluster 32
+0	707aa, >tr|Q572H0|Q572H0_PHYIN... *
+>Cluster 33
+0	673aa, >tr|D0NUT5|D0NUT5_PHYIT... *
+>Cluster 34
+0	671aa, >tr|A0A0W8DDG6|A0A0W8DDG6_PHYNI... *
+>Cluster 35
+0	670aa, >tr|D0NMK8|D0NMK8_PHYIT... *
+1	621aa, >tr|M4C5N5|M4C5N5_HYAAE... at 3.40e-128/591aa/38.748%
+2	618aa, >CRN16... at 9.14e-26/663aa/25.490%
+3	237aa, >tr|A0A329T1B7|A0A329T1B7_9STRA... at 2.06e-19/255aa/27.843%
+>Cluster 36
+0	666aa, >tr|D0NNY0|D0NNY0_PHYIT... *
+>Cluster 37
+0	658aa, >tr|A0A0W8CTF9|A0A0W8CTF9_PHYNI... *
+>Cluster 38
+0	654aa, >tr|A0A0W8C4H7|A0A0W8C4H7_PHYNI... *
+>Cluster 39
+0	654aa, >tr|A0A833W8V8|A0A833W8V8_PHYIN... *
+>Cluster 40
+0	652aa, >tr|A0A3F2YED2|A0A3F2YED2_BRELC... *
+>Cluster 41
+0	651aa, >tr|Q572I1|Q572I1_PHYIN... *
+>Cluster 42
+0	641aa, >Jsi1... *
+>Cluster 43
+0	639aa, >Cgfl_Extracellular_metalloproteinase_mep_Colletotrichum_graminicola... *
+>Cluster 44
+0	638aa, >tr|A0A329SZX5|A0A329SZX5_9STRA... *
+1	391aa, >P0CY26|PHI68|Sap1... at 1.09e-07/325aa/22.462%,1:391:1:398/69.42%
+2	391aa, >P0CY27|PHI6783PHI6789PHI6811|Sap1... at 1.09e-07/325aa/22.462%,1:391:1:398/69.42%,1:391:1:391/99.49%
+3	398aa, >P0CY28|PHI73|Sap3... at 1.09e-07/325aa/22.462%
+4	398aa, >P0DJ06|PHI72PHI6784PHI6790PHI6812|Sap2... at 1.09e-07/325aa/22.462%,1:398:1:398/71.50%
+>Cluster 45
+0	637aa, >tr|D0NNE6|D0NNE6_PHYIT... *
+>Cluster 46
+0	632aa, >tr|Q572D1|Q572D1_PHYIN... *
+>Cluster 47
+0	606aa, >tr|A0A8A1V6F3|A0A8A1V6F3_PHYCP... *
+1	599aa, >CRN8... at 2.26e-71/541aa/33.457%,1:599:1:605/87.38%
+2	605aa, >tr|D0NNF5|D0NNF5_PHYIT... at 2.26e-71/541aa/33.457%
+3	364aa, >tr|A0A329SH01|A0A329SH01_9STRA... at 9.64e-12/320aa/24.375%
+>Cluster 48
+0	604aa, >tr|A0A8A1V4J1|A0A8A1V4J1_PHYCP... *
+>Cluster 49
+0	593aa, >tr|Q572K3|Q572K3_PHYIN... *
+>Cluster 50
+0	589aa, >tr|Q572L9|Q572L9_PHYIN... *
+>Cluster 51
+0	584aa, >Mig2-2... *
+>Cluster 52
+0	582aa, >tr|A0A833WKW3|A0A833WKW3_PHYIN... *
+>Cluster 53
+0	580aa, >tr|D0NND9|D0NND9_PHYIT... *
+>Cluster 54
+0	578aa, >AvrSr35... *
+1	578aa, >PgtAvrSr35... at 1:578:1:578/100.00%
+>Cluster 55
+0	556aa, >OPEL... *
+>Cluster 56
+0	548aa, >tr|Q572I2|Q572I2_PHYIN... *
+>Cluster 57
+0	544aa, >N1RSK9... *
+>Cluster 58
+0	542aa, >A0A0A2JB06... *
+>Cluster 59
+0	531aa, >tr|A0A3B7TYL3|A0A3B7TYL3_BRELC... *
+>Cluster 60
+0	530aa, >BSW11... *
+>Cluster 61
+0	529aa, >GP42... *
+>Cluster 62
+0	529aa, >tr|Q572D4|Q572D4_PHYIN... *
+>Cluster 63
+0	527aa, >tr|A0A329RQG2|A0A329RQG2_9STRA... *
+>Cluster 64
+0	523aa, >tr|A0A329SZQ2|A0A329SZQ2_9STRA... *
+>Cluster 65
+0	519aa, >sp|D0NQB4|RXLRS_PHYIT... *
+1	467aa, >tr|E0W4W9|E0W4W9_PHYSO... at 4.58e-62/401aa/30.175%
+2	456aa, >tr|E0W5E1|E0W5E1_PHYSO... at 4.16e-65/414aa/32.609%
+3	375aa, >HaRxL24... at 3.31e-27/372aa/26.613%
+4	366aa, >tr|G5A7M6|G5A7M6_PHYSP... at 4.87e-22/295aa/25.763%
+5	349aa, >sp|D0NVS7|CRE15_PHYIT... at 3.00e-16/284aa/26.056%
+6	332aa, >tr|G5A857|G5A857_PHYSP... at 9.69e-21/339aa/25.664%
+7	311aa, >tr|D0N0G5|D0N0G5_PHYIT... at 1.51e-29/258aa/31.008%
+8	236aa, >tr|G5A914|G5A914_PHYSP... at 3.00e-07/243aa/26.337%
+>Cluster 66
+0	514aa, >tr|D0NIG7|D0NIG7_PHYIT... *
+>Cluster 67
+0	514aa, >tr|A0A3B7TLU3|A0A3B7TLU3_BRELC... *
+>Cluster 68
+0	513aa, >G2XA95... *
+1	169aa, >J5J7Y8... at 2.39e-20/144aa/31.250%
+>Cluster 69
+0	502aa, >BLN06... *
+>Cluster 70
+0	497aa, >tr|A0A329SR41|A0A329SR41_9STRA... *
+>Cluster 71
+0	493aa, >tr|Q572G2|Q572G2_PHYIN... *
+>Cluster 72
+0	491aa, >tr|A0A3B7TGA9|A0A3B7TGA9_BRELC... *
+>Cluster 73
+0	488aa, >tr|D0N3P2|D0N3P2_PHYIT... *
+>Cluster 74
+0	488aa, >tr|D0NGU2|D0NGU2_PHYIT... *
+1	461aa, >tr|G4YDY4|G4YDY4_PHYSP... at 9.93e-101/488aa/40.574%
+>Cluster 75
+0	486aa, >tr|A0A329RK59|A0A329RK59_9STRA... *
+1	392aa, >tr|G4ZMF1|G4ZMF1_PHYSP... at 1.08e-55/374aa/39.305%
+2	368aa, >tr|G4ZQC2|G4ZQC2_PHYSP... at 6.35e-22/353aa/25.496%
+3	357aa, >HaRxL22... at 4.05e-19/363aa/26.446%
+>Cluster 76
+0	485aa, >BSW04p... *
+>Cluster 77
+0	484aa, >sp|D0N4Y1|RD18_PHYIT... *
+1	476aa, >BLR20... at 6.81e-18/438aa/22.603%
+2	476aa, >tr|A0A3B7TYJ6|A0A3B7TYJ6_BRELC... at 6.81e-18/438aa/22.603%,1:476:1:476/99.79%
+3	447aa, >BLN08_2... at 5.70e-16/387aa/22.481%
+4	373aa, >tr|G4ZAZ4|G4ZAZ4_PHYSP... at 7.12e-49/300aa/33.000%
+5	225aa, >tr|A0A329S315|A0A329S315_9STRA... at 1.19e-41/196aa/36.735%
+6	184aa, >tr|A0A329RQY3|A0A329RQY3_9STRA... at 5.30e-09/192aa/26.562%
+>Cluster 78
+0	479aa, >BLR13... *
+1	457aa, >BLR36... at 2.27e-13/385aa/24.935%
+>Cluster 79
+0	479aa, >tr|A0A329RXN3|A0A329RXN3_9STRA... *
+>Cluster 80
+0	479aa, >tr|A0A833TH18|A0A833TH18_PHYIN... *
+>Cluster 81
+0	472aa, >tr|G4ZAQ1|G4ZAQ1_PHYSP... *
+>Cluster 82
+0	469aa, >RiCRN1... *
+>Cluster 83
+0	466aa, >tr|M4BG46|M4BG46_HYAAE... *
+1	416aa, >HaRxL73... at 2.44e-19/377aa/27.321%
+>Cluster 84
+0	456aa, >CRN2... *
+1	450aa, >CRN63... at 3.12e-164/474aa/54.219%
+2	431aa, >CRN1... at 4.86e-37/474aa/29.114%
+3	385aa, >tr|A0A329RM03|A0A329RM03_9STRA... at 5.71e-92/474aa/41.350%
+>Cluster 85
+0	451aa, >sp|P0CV44|RL111_PLAVT... *
+>Cluster 86
+0	450aa, >tr|A0A0W8DGB3|A0A0W8DGB3_PHYNI... *
+>Cluster 87
+0	446aa, >tr|A0A0W8D9Y8|A0A0W8D9Y8_PHYNI... *
+>Cluster 88
+0	439aa, >sp|P0CV47|RL117_PLAVT... *
+1	352aa, >sp|P0CV50|RL122_PLAVT... at 1.44e-56/350aa/40.571%
+2	306aa, >sp|P0CV24|RLR76_PLAVT... at 3.67e-43/302aa/38.742%
+>Cluster 89
+0	434aa, >BSW03... *
+>Cluster 90
+0	433aa, >OASTL... *
+>Cluster 91
+0	430aa, >eff1-1_Ustilago_maydis_... *
+>Cluster 92
+0	430aa, >B8NE69... *
+>Cluster 93
+0	427aa, >tr|A0A329RN01|A0A329RN01_9STRA... *
+1	396aa, >tr|A0A329T585|A0A329T585_9STRA... at 1.57e-97/395aa/44.557%
+>Cluster 94
+0	426aa, >tr|A0A8A1V876|A0A8A1V876_PHYCP... *
+1	389aa, >tr|A0A8A1VA29|A0A8A1VA29_PHYCP... at 1.94e-50/402aa/32.338%
+2	186aa, >tr|D0P249|D0P249_PHYIT... at 2.00e-15/180aa/32.778%
+>Cluster 95
+0	423aa, >tr|A0A833SV38|A0A833SV38_PHYIN... *
+>Cluster 96
+0	423aa, >tr|Q7XB16|Q7XB16_PHYIN... *
+>Cluster 97
+0	422aa, >Lysm1... *
+>Cluster 98
+0	418aa, >tr|M4BZM1|M4BZM1_HYAAE... *
+>Cluster 99
+0	417aa, >tr|Q572J3|Q572J3_PHYIN... *
+>Cluster 100
+0	416aa, >sp|A0A172M470|RLR25_PLAVT... *
+>Cluster 101
+0	415aa, >HaRxL96... *
+1	201aa, >tr|D0NBT8|D0NBT8_PHYIT... at 2.78e-09/214aa/25.234%
+>Cluster 102
+0	409aa, >tr|A0A329RTP9|A0A329RTP9_9STRA... *
+1	198aa, >sp|A0A3B7TNW2|BLC01_BRELC... at 4.37e-22/194aa/29.897%
+2	173aa, >tr|A0A329S0Y8|A0A329S0Y8_9STRA... at 3.75e-15/150aa/34.667%
+>Cluster 103
+0	404aa, >Mig2-6... *
+>Cluster 104
+0	401aa, >tr|M4BAE7|M4BAE7_HYAAE... *
+>Cluster 105
+0	400aa, >tr|A0A329RZB6|A0A329RZB6_9STRA... *
+>Cluster 106
+0	394aa, >Q00663|PHI17|Acp... *
+>Cluster 107
+0	393aa, >tr|G3C9N7|G3C9N7_HYAAE... *
+1	367aa, >ATR5... at 1.32e-07/349aa/24.355%,1:363:1:368/87.23%
+2	371aa, >tr|E6YE66|E6YE66_HYAAB... at 1.32e-07/349aa/24.355%
+>Cluster 108
+0	392aa, >Zt89160... *
+>Cluster 109
+0	391aa, >tr|M4B6K9|M4B6K9_HYAAE... *
+>Cluster 110
+0	388aa, >P29138|PHI4615|Pr1... *
+>Cluster 111
+0	386aa, >W2MG57|PHI7911|Ppxyn1... *
+1	384aa, >O59937|PHI569|Xyl3... at 7.08e-57/320aa/36.250%
+2	380aa, >Q8NJ73|PHI2043|Xyl-6... at 7.08e-57/320aa/36.250%,3:380:3:384/74.09%
+3	344aa, >CfTom1... at 3.22e-23/312aa/25.000%
+4	344aa, >CfTom1... at 3.22e-23/312aa/25.000%,1:344:1:344/100.00%
+>Cluster 112
+0	386aa, >tr|D0NWD8|D0NWD8_PHYIT... *
+>Cluster 113
+0	385aa, >tr|A0A0W8DNK1|A0A0W8DNK1_PHYNI... *
+>Cluster 114
+0	384aa, >tr|D0NEY9|D0NEY9_PHYIT... *
+1	268aa, >O42830|PHI660|Cbel(gp34)... at 1.19e-65/272aa/43.750%
+2	167aa, >tr|D0MY47|D0MY47_PHYIT... at 1.19e-65/272aa/43.750%,22:167:119:268/88.00%
+>Cluster 115
+0	382aa, >O94100|PHI103PHI1027|Bcpga1Bcpg1... *
+1	364aa, >P26215|PHI3|Pgn1... at 18:364:33:382/63.46%
+2	363aa, >P41749|PHI88|Peca... at 4:363:14:382/60.22%
+3	374aa, >Q4G495|PHI492|Bcpg2... at 1:374:1:382/60.77%
+4	379aa, >Q9C4A0|PHI2817|Aapg1... at 3.49e-101/347aa/59.078%
+5	379aa, >Q9C4A1|PHI2818|Acpg1... at 3.49e-101/347aa/59.078%,1:379:1:379/99.21%
+>Cluster 116
+0	379aa, >tr|A0A329S4C3|A0A329S4C3_9STRA... *
+1	377aa, >tr|A0A329S5M9|A0A329S5M9_9STRA... at 5.41e-39/398aa/31.910%
+2	363aa, >tr|A0A329RZJ1|A0A329RZJ1_9STRA... at 1.35e-54/384aa/36.719%
+3	298aa, >tr|A0A329S332|A0A329S332_9STRA... at 1.55e-23/320aa/31.562%
+>Cluster 117
+0	378aa, >tr|A0A833WDY7|A0A833WDY7_PHYIN... *
+>Cluster 118
+0	376aa, >tr|A0A329S258|A0A329S258_9STRA... *
+>Cluster 119
+0	370aa, >O00094|PHI114|Pg1... at 3.68e-83/333aa/43.243%
+1	369aa, >P78607|PHI247|Cppg1... at 1:369:1:370/90.81%
+2	370aa, >P78608|PHI437|Cppg2... *
+3	361aa, >Q0ZJ79|PHI2343|Pcipg2... at 2.00e-49/320aa/35.938%
+>Cluster 120
+0	368aa, >tr|Q572J0|Q572J0_PHYIN... *
+>Cluster 121
+0	367aa, >tr|A0A329RGY5|A0A329RGY5_9STRA... *
+>Cluster 122
+0	366aa, >tr|D0NIA8|D0NIA8_PHYIT... *
+>Cluster 123
+0	364aa, >N4TQ97... *
+1	363aa, >X0K3U9... at 1:363:1:364/93.41%
+2	356aa, >tr|G4YH64|G4YH64_PHYSP... at 3.46e-72/332aa/38.554%
+>Cluster 124
+0	364aa, >tr|G4YRT0|G4YRT0_PHYSP... *
+>Cluster 125
+0	364aa, >tr|A0A329RMP5|A0A329RMP5_9STRA... *
+1	356aa, >tr|A0A329SU95|A0A329SU95_9STRA... at 1.28e-71/368aa/40.217%
+2	143aa, >tr|A0A329SEF5|A0A329SEF5_9STRA... at 2.24e-13/141aa/30.496%
+3	101aa, >tr|A0A329SG52|A0A329SG52_9STRA... at 6.82e-09/91aa/38.462%
+>Cluster 126
+0	363aa, >BSW14... *
+>Cluster 127
+0	363aa, >tr|A0A0W8DCK3|A0A0W8DCK3_PHYNI... *
+>Cluster 128
+0	362aa, >tr|Q572G4|Q572G4_PHYIN... *
+>Cluster 129
+0	360aa, >tr|Q572I8|Q572I8_PHYIN... *
+>Cluster 130
+0	358aa, >Q9HFZ2|PHI184|Rbt4... *
+>Cluster 131
+0	358aa, >tr|A0A329SI61|A0A329SI61_9STRA... *
+1	260aa, >tr|E0W5D8|E0W5D8_PHYSO... at 4.20e-17/214aa/27.570%
+>Cluster 132
+0	355aa, >MoCDIP1... *
+>Cluster 133
+0	355aa, >tr|G4Z833|G4Z833_PHYSP... *
+>Cluster 134
+0	353aa, >tr|A0A329S2G6|A0A329S2G6_9STRA... *
+>Cluster 135
+0	351aa, >FGL1_Fusarium_graminearum... *
+>Cluster 136
+0	348aa, >CgEP1_Colletotrichum_graminicola... *
+1	304aa, >CgEP1... at 1:300:1:300/98.33%
+>Cluster 137
+0	348aa, >Q8J1Y3|PHI409|Bbchit1... *
+>Cluster 138
+0	348aa, >tr|A0A329RBW0|A0A329RBW0_9STRA... *
+>Cluster 139
+0	348aa, >tr|D0NKK4|D0NKK4_PHYIT... *
+>Cluster 140
+0	344aa, >A0A0A2JVC2... *
+>Cluster 141
+0	343aa, >tr|D0NL39|D0NL39_PHYIT... *
+>Cluster 142
+0	178aa, >HaRxLL470b... at 1:166:23:188/99.40%
+1	340aa, >tr|M4C486|M4C486_HYAAE... *
+>Cluster 143
+0	338aa, >tr|D0MS99|D0MS99_PHYIT... *
+>Cluster 144
+0	336aa, >VdSCP41... *
+>Cluster 145
+0	335aa, >tr|A0A329S9F3|A0A329S9F3_9STRA... *
+>Cluster 146
+0	333aa, >Q5TIP4|PHI2347|Pgip2... *
+>Cluster 147
+0	333aa, >PNPi... *
+>Cluster 148
+0	330aa, >SSPbP03... *
+>Cluster 149
+0	327aa, >M2TW52|PHI4988|Ppt1... *
+1	327aa, >W6ZBM1|PHI4989|Ppt1... at 1:327:1:327/94.80%
+>Cluster 150
+0	325aa, >tr|G4Z622|G4Z622_PHYSP... *
+>Cluster 151
+0	324aa, >ATR1... at 1:311:1:313/80.89%
+1	323aa, >ATR1... at 1:311:1:313/80.89%,1:323:1:324/99.07%
+2	324aa, >ATR1... *
+3	323aa, >ATR1... at 1:323:1:324/99.07%
+>Cluster 152
+0	322aa, >tr|A0A329S239|A0A329S239_9STRA... *
+1	243aa, >tr|A0A329RR69|A0A329RR69_9STRA... at 4.08e-28/203aa/33.498%
+>Cluster 153
+0	321aa, >Epi6... *
+>Cluster 154
+0	321aa, >tr|M4C579|M4C579_HYAAE... *
+>Cluster 155
+0	318aa, >tr|A0A329RPQ4|A0A329RPQ4_9STRA... *
+>Cluster 156
+0	318aa, >tr|D0NFK3|D0NFK3_PHYIT... *
+>Cluster 157
+0	316aa, >BEC1019... *
+>Cluster 158
+0	316aa, >Pemg1... *
+>Cluster 159
+0	316aa, >A0A0A2JY92... *
+>Cluster 160
+0	315aa, >tr|Q572I9|Q572I9_PHYIN... *
+>Cluster 161
+0	315aa, >tr|D0N7Q1|D0N7Q1_PHYIT... *
+>Cluster 162
+0	314aa, >AvrM... *
+>Cluster 163
+0	314aa, >PsAvr3b... *
+1	227aa, >Avr3b... at 1:227:1:229/79.48%
+2	261aa, >tr|F8UNP8|F8UNP8_PHYCP... at 1.99e-20/210aa/35.714%
+>Cluster 164
+0	314aa, >tr|A0A329RTG3|A0A329RTG3_9STRA... *
+>Cluster 165
+0	311aa, >SP7... *
+>Cluster 166
+0	308aa, >P43070|PHI61|Bgl2... *
+1	299aa, >N1JK84|PHI2896|Bec1005... at 4.19e-21/242aa/26.860%
+>Cluster 167
+0	308aa, >tr|A0A329RZF5|A0A329RZF5_9STRA... *
+>Cluster 168
+0	307aa, >SSPbP94... *
+>Cluster 169
+0	281aa, >HaRxL17... at 1:281:25:305/99.29%
+1	305aa, >tr|F6MEZ5|F6MEZ5_HYAAB... *
+>Cluster 170
+0	305aa, >tr|G4YF67|G4YF67_PHYSP... *
+1	248aa, >tr|G5AAL6|G5AAL6_PHYSP... at 1.38e-29/219aa/35.616%
+>Cluster 171
+0	304aa, >HaRxLL441... *
+>Cluster 172
+0	304aa, >tr|F6MF07|F6MF07_HYAAB... *
+>Cluster 173
+0	303aa, >tr|G4ZW63|G4ZW63_PHYSP... *
+1	293aa, >tr|G4ZW24|G4ZW24_PHYSP... at 1.47e-57/259aa/47.104%
+2	290aa, >tr|A0A329S5L0|A0A329S5L0_9STRA... at 1.09e-24/263aa/31.939%
+>Cluster 174
+0	302aa, >SsSSITL... *
+>Cluster 175
+0	301aa, >tr|A0A329SHD9|A0A329SHD9_9STRA... *
+>Cluster 176
+0	299aa, >RXLR19... *
+>Cluster 177
+0	295aa, >MoCDIP4... *
+>Cluster 178
+0	293aa, >Six13... *
+>Cluster 179
+0	292aa, >PGTG_08638... *
+>Cluster 180
+0	292aa, >tr|G1FSI6|G1FSI6_PHYSO... *
+1	283aa, >tr|D0NCI3|D0NCI3_PHYIT... at 3.73e-31/274aa/30.657%
+2	153aa, >tr|G4ZNY0|G4ZNY0_PHYSP... at 4.20e-09/149aa/30.201%
+>Cluster 181
+0	292aa, >tr|A0A329RGK1|A0A329RGK1_9STRA... *
+>Cluster 182
+0	292aa, >tr|A0A329SX94|A0A329SX94_9STRA... *
+>Cluster 183
+0	291aa, >PpEC23... *
+>Cluster 184
+0	291aa, >SNE1... *
+>Cluster 185
+0	290aa, >Cmu1_Ustilago_maydis... *
+>Cluster 186
+0	290aa, >Q9P470|PHI257|Gas2... *
+1	251aa, >Q96TN6|PHI256|Gas1... at 1.19e-24/305aa/28.852%
+>Cluster 187
+0	289aa, >Q945T9|PHI653|Gip2... *
+1	257aa, >GIP1... at 1.18e-100/235aa/60.000%
+>Cluster 188
+0	288aa, >tr|A0A329RYA5|A0A329RYA5_9STRA... *
+>Cluster 189
+0	287aa, >PiAvr4... *
+1	198aa, >PITG_22926... at 7.51e-11/202aa/29.208%
+2	191aa, >tr|G4ZSK4|G4ZSK4_PHYSP... at 1.08e-08/161aa/27.950%
+>Cluster 190
+0	287aa, >tr|M4BDQ6|M4BDQ6_HYAAE... *
+>Cluster 191
+0	286aa, >tr|Q09QS3|Q09QS3_BLUGH... *
+>Cluster 192
+0	286aa, >RXLR13... *
+>Cluster 193
+0	261aa, >HaRxL106... at 1:261:25:285/100.00%
+1	285aa, >sp|M4C4U1|RX106_HYAAE... *
+>Cluster 194
+0	285aa, >tr|G5A571|G5A571_PHYSP... *
+>Cluster 195
+0	284aa, >SIX1... *
+>Cluster 196
+0	283aa, >Cri_9402... *
+>Cluster 197
+0	172aa, >EPIC4... at 1:164:1:158/81.71%
+1	280aa, >tr|A0A0W8D4R3|A0A0W8D4R3_PHYNI... *
+2	131aa, >EPIC3... at 4.36e-21/106aa/40.566%
+>Cluster 198
+0	279aa, >Avr1k... *
+1	226aa, >tr|G4YHS5|G4YHS5_PHYSP... at 6.73e-15/215aa/31.163%
+>Cluster 199
+0	279aa, >sp|P0CV33|RLR90_PLAVT... *
+>Cluster 200
+0	278aa, >sp|P0CV65|RL151_PLAVT... *
+1	261aa, >sp|P0CV68|RL154_PLAVT... at 3.25e-54/275aa/36.727%
+>Cluster 201
+0	274aa, >tr|G4ZCT0|G4ZCT0_PHYSP... *
+1	226aa, >tr|A0A329STP2|A0A329STP2_9STRA... at 7.56e-14/208aa/25.481%
+2	195aa, >AVH195... at 7.59e-11/203aa/25.616%,1:189:1:194/65.64%
+3	202aa, >tr|D0N0K0|D0N0K0_PHYIT... at 7.59e-11/203aa/25.616%
+>Cluster 202
+0	274aa, >sp|P0CV09|RLR40_PLAVT... *
+>Cluster 203
+0	273aa, >tr|G4Z2E0|G4Z2E0_PHYSP... *
+>Cluster 204
+0	270aa, >tr|A0A0W8DD52|A0A0W8DD52_PHYNI... *
+>Cluster 205
+0	270aa, >tr|A0A329T0A2|A0A329T0A2_9STRA... *
+1	190aa, >tr|A1Y153|A1Y153_9STRA... at 3.27e-09/170aa/30.588%
+>Cluster 206
+0	270aa, >tr|A0A3B7TFH9|A0A3B7TFH9_BRELC... *
+>Cluster 207
+0	268aa, >sp|A0A172M4M8|RLR5_PLAVT... *
+>Cluster 208
+0	266aa, >Avr1b-2... *
+>Cluster 209
+0	264aa, >tr|A0A090B862|A0A090B862_HYAAE... *
+>Cluster 210
+0	264aa, >tr|Q572F8|Q572F8_PHYIN... *
+>Cluster 211
+0	263aa, >BLR38... *
+1	260aa, >sp|A0A3B7TNM4|BLR38_BRELC... at 1:260:1:263/94.30%
+>Cluster 212
+0	263aa, >tr|D0NA30|D0NA30_PHYIT... *
+>Cluster 213
+0	260aa, >Rsp1... *
+>Cluster 214
+0	260aa, >tr|A0A329RUA8|A0A329RUA8_9STRA... *
+1	238aa, >tr|D0N8M0|D0N8M0_PHYIT... at 7.54e-39/227aa/34.361%
+>Cluster 215
+0	258aa, >tr|G4ZQC9|G4ZQC9_PHYSP... *
+1	251aa, >tr|G4ZQC8|G4ZQC8_PHYSP... at 1.84e-21/202aa/33.663%
+>Cluster 216
+0	255aa, >tr|Q572D2|Q572D2_PHYIN... *
+>Cluster 217
+0	253aa, >tr|D0NP85|D0NP85_PHYIT... *
+>Cluster 218
+0	251aa, >PgShr8... *
+>Cluster 219
+0	251aa, >tr|M4BKF8|M4BKF8_HYAAE... *
+1	198aa, >RXLR16... at 9.70e-57/246aa/50.407%
+>Cluster 220
+0	250aa, >tr|G4ZL14|G4ZL14_PHYSP... *
+1	245aa, >tr|G4ZL15|G4ZL15_PHYSP... at 5.89e-16/243aa/27.984%
+2	229aa, >sp|D0NNI8|RXLAD_PHYIT... at 3.63e-21/208aa/29.808%
+3	208aa, >Avr1_PITG_16663... at 1.34e-12/198aa/32.828%
+4	131aa, >tr|G4ZL21|G4ZL21_PHYSP... at 7.81e-12/121aa/33.058%
+>Cluster 221
+0	248aa, >tr|A0A0A1ESP1|A0A0A1ESP1_PHYCP... *
+>Cluster 222
+0	245aa, >tr|G5A456|G5A456_PHYSP... *
+1	176aa, >tr|G4Z6L2|G4Z6L2_PHYSP... at 3.12e-26/164aa/37.805%
+2	144aa, >tr|G5A541|G5A541_PHYSP... at 2.58e-14/127aa/32.283%
+>Cluster 223
+0	243aa, >BLG03... *
+>Cluster 224
+0	243aa, >sp|A0A172M4N0|RLR28_PLAVT... *
+>Cluster 225
+0	242aa, >SIX4... *
+>Cluster 226
+0	242aa, >tr|A0A329RFS9|A0A329RFS9_9STRA... *
+>Cluster 227
+0	241aa, >PsXEG1... *
+>Cluster 228
+0	241aa, >RXLR20... *
+>Cluster 229
+0	241aa, >sp|D0NMF6|SFI5_PHYIT... *
+1	167aa, >tr|G5A4Y5|G5A4Y5_PHYSP... at 1.20e-13/134aa/35.821%
+2	132aa, >tr|A0A833SXE5|A0A833SXE5_PHYIN... at 8.15e-07/123aa/33.333%
+3	131aa, >tr|G4YP50|G4YP50_PHYSP... at 2.07e-10/127aa/33.858%
+4	121aa, >PexRD2... at 8.03e-07/119aa/26.891%
+>Cluster 230
+0	241aa, >tr|A0A329RZV2|A0A329RZV2_9STRA... *
+>Cluster 231
+0	239aa, >tr|A0A329RGQ1|A0A329RGQ1_9STRA... *
+>Cluster 232
+0	239aa, >tr|M4B3D8|M4B3D8_HYAAE... *
+>Cluster 233
+0	238aa, >tr|A0A329SC93|A0A329SC93_9STRA... *
+>Cluster 234
+0	238aa, >tr|Q572K9|Q572K9_PHYIN... *
+1	237aa, >tr|Q572L0|Q572L0_PHYIN... at 1.78e-49/199aa/50.251%
+>Cluster 235
+0	237aa, >tr|A0A329S1W3|A0A329S1W3_9STRA... *
+>Cluster 236
+0	236aa, >tr|Q572C9|Q572C9_PHYIN... *
+>Cluster 237
+0	235aa, >BEC4... *
+>Cluster 238
+0	235aa, >HaRxL70... *
+>Cluster 239
+0	235aa, >sp|A0A172M468|RLR27_PLAVT... *
+>Cluster 240
+0	235aa, >tr|G5A859|G5A859_PHYSP... *
+1	212aa, >tr|D0NK37|D0NK37_PHYIT... at 4.74e-16/176aa/30.114%
+2	194aa, >tr|G5A9Q3|G5A9Q3_PHYSP... at 3.48e-07/168aa/23.214%
+>Cluster 241
+0	232aa, >SIX2... *
+>Cluster 242
+0	232aa, >Mg3LysM... *
+1	232aa, >Mg3LysM... at 1:232:1:232/100.00%
+2	228aa, >ECP6_Cladosporium_fulvum... at 8.00e-57/196aa/47.449%
+3	162aa, >Slp1... at 6.01e-25/153aa/39.869%
+>Cluster 243
+0	232aa, >tr|A0A0A0S3X0|A0A0A0S3X0_LEPMC... *
+1	230aa, >AvrLm2... at 1:230:1:232/98.28%
+>Cluster 244
+0	232aa, >tr|A0A0W8DJ21|A0A0W8DJ21_PHYNI... *
+>Cluster 245
+0	232aa, >tr|D0N1Y0|D0N1Y0_PHYIT... *
+>Cluster 246
+0	232aa, >tr|G4ZTM5|G4ZTM5_PHYSP... *
+>Cluster 247
+0	232aa, >tr|Q572D0|Q572D0_PHYIN... *
+>Cluster 248
+0	231aa, >N1JK93|PHI2901|Bec1040... *
+>Cluster 249
+0	231aa, >FGSG_10999... *
+>Cluster 250
+0	230aa, >Tox3... *
+1	222aa, >M1GM60... at 1:222:1:222/98.65%
+>Cluster 251
+0	230aa, >Q99174|PHI2849|Cuta... *
+1	202aa, >Q00298|PHI69|Cuta... at 3.04e-18/166aa/34.940%
+2	201aa, >Q2VF46|PHI2383|Mfcut1... at 3.04e-18/166aa/34.940%,1:200:1:201/81.09%
+>Cluster 252
+0	230aa, >tr|G4YRD8|G4YRD8_PHYSP... *
+1	224aa, >tr|G4ZR15|G4ZR15_PHYSP... at 2.59e-18/237aa/31.646%
+2	203aa, >tr|G4Z6J8|G4Z6J8_PHYSP... at 7.52e-27/195aa/39.487%
+3	200aa, >tr|G4YRE0|G4YRE0_PHYSP... at 1.30e-11/182aa/34.066%
+>Cluster 253
+0	229aa, >tr|A0A329RWH1|A0A329RWH1_9STRA... *
+1	229aa, >tr|G4ZNS9|G4ZNS9_PHYSP... at 2.19e-16/191aa/28.272%
+2	227aa, >tr|E0W5P4|E0W5P4_PHYSO... at 4.40e-11/198aa/25.758%
+3	195aa, >tr|A0A329SWQ4|A0A329SWQ4_9STRA... at 3.94e-18/163aa/32.515%
+>Cluster 254
+0	224aa, >Q6PQG3|PHI4252|Epi10... at 1:209:1:209/99.04%
+1	228aa, >sp|D0NJ41|EPI10_PHYIT... *
+>Cluster 255
+0	225aa, >HvEC_016... *
+1	225aa, >2_NFIP_EGIP_HvEC016|5|1... at 1:225:1:225/100.00%
+>Cluster 256
+0	215aa, >SIX6... at 1:207:1:207/99.52%
+1	225aa, >C9WMG8... *
+>Cluster 257
+0	224aa, >AVR-Pita1... *
+1	224aa, >tr|F7J180|F7J180_MAGOR... at 1:224:1:224/81.70%
+2	224aa, >MoAVR_Pita2... at 1:224:1:224/81.70%,1:224:1:224/99.11%
+>Cluster 258
+0	224aa, >2_NFIP_OFITP_ELU40461.1... *
+>Cluster 259
+0	224aa, >tr|G5A858|G5A858_PHYSP... *
+>Cluster 260
+0	221aa, >tr|A0A329SQY9|A0A329SQY9_9STRA... *
+>Cluster 261
+0	220aa, >RTP1... *
+>Cluster 262
+0	220aa, >SIX7... *
+>Cluster 263
+0	220aa, >PsAvr3c... *
+>Cluster 264
+0	219aa, >tr|A0A329RNW1|A0A329RNW1_9STRA... *
+>Cluster 265
+0	217aa, >tr|A0A329SK33|A0A329SK33_9STRA... *
+>Cluster 266
+0	216aa, >VdSCP7_Verticillium_dahliae... *
+>Cluster 267
+0	215aa, >sp|D0MR64|RXLRD_PHYIT... *
+>Cluster 268
+0	214aa, >G0X7P5... *
+>Cluster 269
+0	213aa, >sp|D0NQC3|RD1_PHYIT... *
+1	208aa, >tr|G4ZJF0|G4ZJF0_PHYSP... at 6.95e-28/198aa/34.848%
+>Cluster 270
+0	213aa, >tr|G4Z2U6|G4Z2U6_PHYSP... *
+>Cluster 271
+0	211aa, >SpHTP3... *
+>Cluster 272
+0	210aa, >Pslsc1... *
+>Cluster 273
+0	210aa, >tr|A0A1A7UPA0|A0A1A7UPA0_PHYCP... *
+>Cluster 274
+0	209aa, >tr|F6MF02|F6MF02_HYAAB... *
+>Cluster 275
+0	208aa, >PC2... *
+>Cluster 276
+0	207aa, >Tin2_Ustilago_maydis_... *
+>Cluster 277
+0	206aa, >tr|D0P1F5|D0P1F5_PHYIT... *
+>Cluster 278
+0	205aa, >AvrLm1_Leptosphaeria_maculans... *
+>Cluster 279
+0	205aa, >tr|G4YL36|G4YL36_PHYSP... *
+>Cluster 280
+0	204aa, >tr|A0A329SUX5|A0A329SUX5_9STRA... *
+>Cluster 281
+0	204aa, >tr|G4Z6D6|G4Z6D6_PHYSP... *
+>Cluster 282
+0	204aa, >tr|G5A9E5|G5A9E5_PHYSP... *
+>Cluster 283
+0	203aa, >tr|G4ZZF7|G4ZZF7_PHYSP... *
+1	179aa, >tr|G4Z5H6|G4Z5H6_PHYSP... at 2.05e-07/171aa/28.070%
+2	149aa, >tr|G5A8G8|G5A8G8_PHYSP... at 6.50e-10/139aa/28.058%
+>Cluster 284
+0	202aa, >Q4WMA6|PHI4016|Cfmb... *
+>Cluster 285
+0	202aa, >SCR108... *
+>Cluster 286
+0	202aa, >tr|A0A329RP28|A0A329RP28_9STRA... *
+>Cluster 287
+0	202aa, >sp|A0A182BSR8|RLR11_PLAVT... *
+>Cluster 288
+0	202aa, >tr|D0NTJ0|D0NTJ0_PHYIT... *
+1	182aa, >tr|G5A7L0|G5A7L0_PHYSP... at 3.00e-08/183aa/28.415%
+>Cluster 289
+0	201aa, >tr|D0P387|D0P387_PHYIT... *
+>Cluster 290
+0	199aa, >Foa3... *
+>Cluster 291
+0	199aa, >PsShr1... *
+>Cluster 292
+0	199aa, >PsShr6... *
+1	191aa, >PsShr4... at 5.57e-17/177aa/29.379%
+>Cluster 293
+0	199aa, >tr|A0A329SV16|A0A329SV16_9STRA... *
+>Cluster 294
+0	198aa, >Q4WNE1|PHI4017|Cfmc... *
+>Cluster 295
+0	198aa, >SpHTP1... *
+>Cluster 296
+0	198aa, >MoHTR1... *
+>Cluster 297
+0	198aa, >tr|A0A329T1T8|A0A329T1T8_9STRA... *
+>Cluster 298
+0	197aa, >sp|P0CV14|RLR48_PLAVT... *
+>Cluster 299
+0	197aa, >sp|P0CV31|RLR86_PLAVT... *
+>Cluster 300
+0	197aa, >tr|G4Z2Y6|G4Z2Y6_PHYSP... *
+1	172aa, >RxLR30... at 8.74e-35/196aa/40.306%
+>Cluster 301
+0	196aa, >tr|D0NF36|D0NF36_PHYIT... *
+>Cluster 302
+0	196aa, >tr|G4YFJ3|G4YFJ3_PHYSP... *
+>Cluster 303
+0	194aa, >sp|G5A8M1|AV240_PHYSP... *
+>Cluster 304
+0	194aa, >tr|G5AAR7|G5AAR7_PHYSP... *
+>Cluster 305
+0	193aa, >G0X7N7... *
+>Cluster 306
+0	193aa, >sp|P0CV53|RL126_PLAVT... *
+>Cluster 307
+0	192aa, >MoCDIP5... *
+>Cluster 308
+0	191aa, >tr|A0A329S3M2|A0A329S3M2_9STRA... *
+1	167aa, >tr|A0A329RLQ2|A0A329RLQ2_9STRA... at 2.55e-17/185aa/30.270%
+2	151aa, >tr|A0A329RBD1|A0A329RBD1_9STRA... at 7.97e-07/183aa/25.683%
+>Cluster 309
+0	191aa, >tr|G4YDX6|G4YDX6_PHYSP... *
+>Cluster 310
+0	191aa, >tr|G4ZSM2|G4ZSM2_PHYSP... *
+>Cluster 311
+0	190aa, >Vdlsc1_Isochorismatase_hydrolase_Verticillium_dahliae_... *
+>Cluster 312
+0	190aa, >UhAvr1_Ustilago_hordei_... *
+>Cluster 313
+0	190aa, >tr|A0A329RYC5|A0A329RYC5_9STRA... *
+>Cluster 314
+0	185aa, >O42718|PHI762|Inf2a... at 1:185:1:189/89.12%
+1	189aa, >O42719|PHI764|Inf2b... *
+>Cluster 315
+0	189aa, >tr|A0A329SYZ0|A0A329SYZ0_9STRA... *
+>Cluster 316
+0	189aa, >sp|D0RLZ2|CRE18_PHYIT... *
+>Cluster 317
+0	189aa, >tr|G4ZW00|G4ZW00_PHYSP... *
+1	163aa, >tr|G5AAR3|G5AAR3_PHYSP... at 7.18e-07/133aa/33.083%
+>Cluster 318
+0	188aa, >Avh241... *
+>Cluster 319
+0	188aa, >tr|G4ZYW6|G4ZYW6_PHYSP... *
+>Cluster 320
+0	188aa, >tr|Q572F6|Q572F6_PHYIN... *
+>Cluster 321
+0	187aa, >ATR13... *
+1	187aa, >sp|M4C367|ATR13_HYAAE... at 1:187:1:187/94.12%
+2	187aa, >ATR13... at 1.48e-97/187aa/77.540%
+3	187aa, >sp|M4C367|ATR13_HYAAE... at 1.48e-97/187aa/77.540%,1:187:1:187/94.12%
+>Cluster 322
+0	141aa, >SIX8... at 1:140:48:187/89.29%
+1	187aa, >FocSix8... *
+>Cluster 323
+0	187aa, >HaRxLL3a... *
+>Cluster 324
+0	185aa, >ATR39-1... at 1:185:1:187/94.65%
+1	187aa, >sp|M4BUU2|AT392_HYAAE... *
+>Cluster 325
+0	185aa, >Q9UV32|PHI176PHI2852|Mig1... *
+>Cluster 326
+0	185aa, >tr|A0A329SC58|A0A329SC58_9STRA... *
+>Cluster 327
+0	185aa, >tr|A0A329SUK8|A0A329SUK8_9STRA... *
+>Cluster 328
+0	183aa, >tr|Q572H5|Q572H5_PHYIN... *
+>Cluster 329
+0	183aa, >tr|D0NQ76|D0NQ76_PHYIT... *
+1	158aa, >PvRXLR131... at 2.76e-10/162aa/32.716%
+>Cluster 330
+0	182aa, >CSEP_09... *
+1	182aa, >CSEP_09... at 1:182:1:182/100.00%
+>Cluster 331
+0	182aa, >PsShr2... *
+>Cluster 332
+0	182aa, >HaRxL2... *
+>Cluster 333
+0	180aa, >SAD1... *
+1	180aa, >SrSAD1... at 1:180:1:180/100.00%
+>Cluster 334
+0	181aa, >Mig2-5... *
+>Cluster 335
+0	181aa, >BLG01... *
+>Cluster 336
+0	181aa, >tr|A0A329RYV8|A0A329RYV8_9STRA... *
+1	177aa, >tr|A0A329R9B0|A0A329R9B0_9STRA... at 5.19e-24/171aa/37.427%
+>Cluster 337
+0	181aa, >tr|G5A4H5|G5A4H5_PHYSP... *
+>Cluster 338
+0	180aa, >tr|A0A329RXC2|A0A329RXC2_9STRA... *
+>Cluster 339
+0	180aa, >tr|A0A329SV74|A0A329SV74_9STRA... *
+1	147aa, >tr|A0A329S8A1|A0A329S8A1_9STRA... at 6.51e-11/139aa/33.813%
+>Cluster 340
+0	179aa, >Q8X1D7|PHI2854|Mig2-1... *
+1	163aa, >Mig2-4... at 1.03e-38/179aa/42.458%
+2	150aa, >Mig2-3... at 1.79e-32/179aa/37.430%
+>Cluster 341
+0	179aa, >tr|A0A0W8CUK5|A0A0W8CUK5_PHYNI... *
+>Cluster 342
+0	178aa, >Pep1_Ustilago_maydis... *
+>Cluster 343
+0	178aa, >ToxA... *
+1	178aa, >P78737... at 1:178:1:178/97.19%
+>Cluster 344
+0	178aa, >ZtNIP2... *
+>Cluster 345
+0	177aa, >AVRk1... *
+>Cluster 346
+0	177aa, >Pst02549... *
+>Cluster 347
+0	177aa, >tr|A0A329SFC2|A0A329SFC2_9STRA... *
+>Cluster 348
+0	177aa, >tr|G4ZPA4|G4ZPA4_PHYSP... *
+>Cluster 349
+0	176aa, >tr|Q572G0|Q572G0_PHYIN... *
+>Cluster 350
+0	175aa, >2_NFIP_OFITP_AEK86767.1... *
+>Cluster 351
+0	175aa, >tr|A0A329T4D6|A0A329T4D6_9STRA... *
+>Cluster 352
+0	175aa, >tr|D0NB59|D0NB59_PHYIT... *
+>Cluster 353
+0	175aa, >tr|Q572J5|Q572J5_PHYIN... *
+>Cluster 354
+0	173aa, >MoCDIP2... at 1:173:1:173/100.00%
+1	174aa, >MoCDIP2... *
+>Cluster 355
+0	173aa, >tr|G4Z777|G4Z777_PHYSP... *
+>Cluster 356
+0	172aa, >HaRxL57... *
+>Cluster 357
+0	172aa, >HaRxLL464... *
+>Cluster 358
+0	172aa, >tr|D0NN39|D0NN39_PHYIT... *
+>Cluster 359
+0	172aa, >tr|T2FGL8|T2FGL8_PHYCP... *
+>Cluster 360
+0	171aa, >MlpCTP1... *
+>Cluster 361
+0	171aa, >tr|A0A329RVT0|A0A329RVT0_9STRA... *
+>Cluster 362
+0	171aa, >tr|D7F1H9|D7F1H9_PHYNI... *
+>Cluster 363
+0	171aa, >tr|A0A329RZH4|A0A329RZH4_9STRA... *
+>Cluster 364
+0	171aa, >tr|A0A329SH79|A0A329SH79_9STRA... *
+>Cluster 365
+0	171aa, >tr|A0A329T4P0|A0A329T4P0_9STRA... *
+>Cluster 366
+0	171aa, >tr|G4ZN92|G4ZN92_PHYSP... *
+>Cluster 367
+0	170aa, >tr|A0A329S007|A0A329S007_9STRA... *
+1	120aa, >tr|A0A329SKM3|A0A329SKM3_9STRA... at 2.10e-08/98aa/26.531%
+>Cluster 368
+0	169aa, >sp|A0A3F2YED3|BLN03_BRELC... *
+>Cluster 369
+0	169aa, >tr|A0A329RL14|A0A329RL14_9STRA... *
+>Cluster 370
+0	168aa, >sp|D0NBU6|CRE8_PHYIT... *
+>Cluster 371
+0	167aa, >Avrfom2... *
+>Cluster 372
+0	167aa, >tr|G4ZKR5|G4ZKR5_PHYSP... *
+>Cluster 373
+0	166aa, >AvrM14... *
+>Cluster 374
+0	166aa, >tr|A0A329SZP4|A0A329SZP4_9STRA... *
+1	118aa, >tr|A0A329SYY8|A0A329SYY8_9STRA... at 1.71e-09/105aa/29.524%
+>Cluster 375
+0	165aa, >ECP2_Cladosporium_fulvum... *
+>Cluster 376
+0	165aa, >Ecp11-1_AQA29221... *
+1	160aa, >tr|A0A0U2R974|A0A0U2R974_LEPMC... at 8.05e-27/145aa/38.621%
+>Cluster 377
+0	165aa, >N1PIZ7... *
+>Cluster 378
+0	164aa, >sp|D0N5L4|RD49_PHYIT... *
+>Cluster 379
+0	164aa, >tr|A0A0W8DCS3|A0A0W8DCS3_PHYNI... *
+>Cluster 380
+0	164aa, >tr|A0A329SC59|A0A329SC59_9STRA... *
+1	147aa, >tr|G4YN07|G4YN07_PHYSP... at 4.46e-21/153aa/36.601%
+>Cluster 381
+0	164aa, >tr|G4Z492|G4Z492_PHYSP... *
+>Cluster 382
+0	163aa, >SIX3... *
+1	163aa, >D0U2D1... at 1:163:1:163/99.39%
+>Cluster 383
+0	163aa, >SsSSVP1_Sclerotinia_sclerotiorum... *
+>Cluster 384
+0	163aa, >tr|E0W5C6|E0W5C6_PHYSO... *
+>Cluster 385
+0	162aa, >NIS1... *
+1	137aa, >sp|G4MQL4|NIS1_MAGO7... at 3.99e-08/118aa/27.966%
+>Cluster 386
+0	162aa, >ZtNIP1... *
+>Cluster 387
+0	162aa, >sp|D0N6E1|RD50_PHYIT... *
+1	159aa, >tr|A0A329RPL5|A0A329RPL5_9STRA... at 3.57e-24/166aa/37.349%
+>Cluster 388
+0	161aa, >N1JFE2... *
+1	155aa, >AvrPm1a... at 1.13e-13/131aa/29.008%
+>Cluster 389
+0	161aa, >tr|A0A329SEE7|A0A329SEE7_9STRA... *
+>Cluster 390
+0	161aa, >tr|A0A833WMK0|A0A833WMK0_PHYIN... *
+>Cluster 391
+0	161aa, >tr|G4ZLV6|G4ZLV6_PHYSP... *
+>Cluster 392
+0	160aa, >RxLR3_2... *
+>Cluster 393
+0	160aa, >sp|P0CV29|RLR83_PLAVT... *
+>Cluster 394
+0	160aa, >tr|G5A723|G5A723_PHYSP... *
+>Cluster 395
+0	137aa, >HaRxL89... at 1:137:24:160/100.00%
+1	160aa, >tr|M4BPI6|M4BPI6_HYAAE... *
+>Cluster 396
+0	160aa, >tr|Q572H3|Q572H3_PHYIN... *
+>Cluster 397
+0	160aa, >tr|Q572J6|Q572J6_PHYIN... *
+>Cluster 398
+0	159aa, >tr|G5A4Z2|G5A4Z2_PHYSP... *
+1	104aa, >tr|G4YJ04|G4YJ04_PHYSP... at 1.49e-12/86aa/32.558%
+>Cluster 399
+0	159aa, >tr|D0MY50|D0MY50_PHYIT... *
+>Cluster 400
+0	159aa, >tr|Q572F1|Q572F1_PHYIN... *
+>Cluster 401
+0	157aa, >See1_Ustilago_maydis_... *
+>Cluster 402
+0	157aa, >G0X854... *
+>Cluster 403
+0	157aa, >2_NFIP_OFITP_pdb|6SGO|A... *
+>Cluster 404
+0	157aa, >tr|D0N0I7|D0N0I7_PHYIT... *
+>Cluster 405
+0	157aa, >tr|Q572I4|Q572I4_PHYIN... *
+>Cluster 406
+0	156aa, >tr|G4ZXE5|G4ZXE5_PHYSP... *
+>Cluster 407
+0	156aa, >tr|Q572E2|Q572E2_PHYIN... *
+>Cluster 408
+0	155aa, >PevD1_Verticillium_dahliae... *
+>Cluster 409
+0	155aa, >CSEP0162... *
+>Cluster 410
+0	155aa, >tr|A0A329SWF8|A0A329SWF8_9STRA... *
+>Cluster 411
+0	154aa, >PexRD24... *
+>Cluster 412
+0	154aa, >sp|P0CU89|RXLAA_PHYIT... *
+>Cluster 413
+0	153aa, >Avr-Pi54... *
+>Cluster 414
+0	153aa, >PiAvrVnt1... *
+>Cluster 415
+0	153aa, >GoEC2... *
+>Cluster 416
+0	153aa, >tr|D0MXZ4|D0MXZ4_PHYIT... *
+>Cluster 417
+0	153aa, >tr|D0N943|D0N943_PHYIT... *
+1	148aa, >tr|G5AIW3|G5AIW3_PHYSP... at 1.88e-09/131aa/26.718%
+>Cluster 418
+0	153aa, >tr|G4YE16|G4YE16_PHYSP... *
+>Cluster 419
+0	152aa, >Avrblb1... *
+1	137aa, >tr|D0NTJ2|D0NTJ2_PHYIT... at 8.81e-07/112aa/33.036%
+>Cluster 420
+0	151aa, >PsShr7... *
+>Cluster 421
+0	151aa, >sp|A0A172M466|RLR30_PLAVT... *
+>Cluster 422
+0	151aa, >tr|A0A329SB41|A0A329SB41_9STRA... *
+1	135aa, >Avh5... at 5.73e-35/150aa/45.333%
+>Cluster 423
+0	150aa, >AvrL567-A... *
+1	150aa, >Q6R659... at 1:150:1:150/88.67%
+>Cluster 424
+0	150aa, >AvrL2-A... *
+>Cluster 425
+0	150aa, >Epi2... *
+1	149aa, >EPI1... at 1.13e-56/148aa/59.459%
+>Cluster 426
+0	150aa, >PgShr9... *
+>Cluster 427
+0	150aa, >RXLR9... *
+>Cluster 428
+0	150aa, >tr|G4YKQ2|G4YKQ2_PHYSP... *
+>Cluster 429
+0	150aa, >tr|A0A833S8X0|A0A833S8X0_PHYIN... *
+>Cluster 430
+0	150aa, >tr|B2C6F4|B2C6F4_PHYSO... *
+1	138aa, >AVR1B-1... at 1.42e-28/144aa/43.056%
+2	131aa, >tr|A0A329RFT0|A0A329RFT0_9STRA... at 4.80e-13/112aa/34.821%
+>Cluster 431
+0	149aa, >SIS1... *
+>Cluster 432
+0	149aa, >SIX10... *
+>Cluster 433
+0	149aa, >sp|P0CV13|RLR47_PLAVT... *
+1	124aa, >sp|A0A182BSS2|RLR49_PLAVT... at 5.18e-15/126aa/37.302%
+>Cluster 434
+0	149aa, >tr|A0A329S5X8|A0A329S5X8_9STRA... *
+>Cluster 435
+0	149aa, >tr|G4ZH34|G4ZH34_PHYSP... *
+>Cluster 436
+0	148aa, >PiAvr3b... *
+>Cluster 437
+0	148aa, >tr|G5ADV7|G5ADV7_PHYSP... *
+>Cluster 438
+0	148aa, >tr|Q572G8|Q572G8_PHYIN... *
+>Cluster 439
+0	147aa, >AVR3a... at 1:147:1:148/84.46%
+1	148aa, >tr|U3M994|U3M994_PHYIN... *
+>Cluster 440
+0	147aa, >Pwl1... *
+1	147aa, >Q01145... at 1:147:1:147/97.96%
+2	145aa, >Pwl2... at 1:145:1:147/75.51%
+>Cluster 441
+0	147aa, >tr|D0NQS1|D0NQS1_PHYIT... *
+1	91aa, >tr|D0NTX2|D0NTX2_PHYIT... at 1.90e-07/73aa/38.356%
+>Cluster 442
+0	147aa, >tr|Q572H2|Q572H2_PHYIN... *
+>Cluster 443
+0	147aa, >sp|A0A3B7TNF2|BLN04_BRELC... *
+>Cluster 444
+0	147aa, >tr|A0A329RLG2|A0A329RLG2_9STRA... *
+>Cluster 445
+0	147aa, >tr|A0A329T211|A0A329T211_9STRA... *
+>Cluster 446
+0	147aa, >tr|Q572C7|Q572C7_PHYIN... *
+>Cluster 447
+0	147aa, >tr|Q572J1|Q572J1_PHYIN... *
+>Cluster 448
+0	146aa, >Blumeria... *
+1	145aa, >Bcg1... at 1:145:1:146/99.32%
+>Cluster 449
+0	146aa, >tr|A0A3B7TND7|A0A3B7TND7_BRELC... *
+1	145aa, >BLR31... at 1.02e-17/133aa/39.098%
+2	145aa, >sp|A0A3B7TLI7|BLR40_BRELC... at 1.02e-17/133aa/39.098%,1:145:1:145/99.31%
+>Cluster 450
+0	146aa, >tr|G5A9K1|G5A9K1_PHYSP... *
+1	144aa, >PITG_03192... at 9.45e-31/126aa/42.857%
+2	126aa, >PvRXLR53... at 1.81e-07/105aa/27.619%
+>Cluster 451
+0	146aa, >tr|A0A329SHR4|A0A329SHR4_9STRA... *
+1	125aa, >Avr1d... at 3.39e-07/113aa/33.628%
+2	106aa, >Avh18a1... at 1.25e-09/111aa/35.135%
+>Cluster 452
+0	146aa, >tr|Q572E8|Q572E8_PHYIN... *
+>Cluster 453
+0	145aa, >E3KHU8... *
+>Cluster 454
+0	145aa, >G2X4U8... *
+>Cluster 455
+0	145aa, >tr|G4ZZX5|G4ZZX5_PHYSP... *
+>Cluster 456
+0	144aa, >AvrLm6_Leptosphaeria_maculans... *
+>Cluster 457
+0	144aa, >AvrSr27... *
+>Cluster 458
+0	144aa, >tr|A0A329S9Y3|A0A329S9Y3_9STRA... *
+>Cluster 459
+0	144aa, >tr|D0N0N9|D0N0N9_PHYIT... *
+>Cluster 460
+0	144aa, >tr|Q572K2|Q572K2_PHYIN... *
+>Cluster 461
+0	143aa, >AvrLm4-7_Leptosphaeria_maculans... *
+>Cluster 462
+0	143aa, >tr|D0NF80|D0NF80_PHYIT... *
+1	121aa, >tr|A0A6M3YRV4|A0A6M3YRV4_PHYCP... at 1.11e-12/112aa/32.143%
+2	120aa, >tr|D0N0Q0|D0N0Q0_PHYIT... at 7.55e-12/106aa/31.132%
+>Cluster 463
+0	142aa, >tr|A0A2H4X1V4|A0A2H4X1V4_9STRA... *
+>Cluster 464
+0	142aa, >tr|A0A329REJ1|A0A329REJ1_9STRA... *
+>Cluster 465
+0	142aa, >tr|A0A329SB26|A0A329SB26_9STRA... *
+>Cluster 466
+0	142aa, >tr|D0NQZ2|D0NQZ2_PHYIT... *
+>Cluster 467
+0	142aa, >tr|G4ZDR0|G4ZDR0_PHYSP... *
+>Cluster 468
+0	141aa, >V5TFR9|PHI5403|Avrlmj1... *
+>Cluster 469
+0	141aa, >tr|A0A329RUZ6|A0A329RUZ6_9STRA... *
+1	133aa, >tr|A0A329R8B0|A0A329R8B0_9STRA... at 9.80e-07/137aa/32.117%
+>Cluster 470
+0	141aa, >tr|G5A4J3|G5A4J3_PHYSP... *
+>Cluster 471
+0	140aa, >PsAvh23... *
+>Cluster 472
+0	140aa, >tr|A0A329SDF5|A0A329SDF5_9STRA... *
+>Cluster 473
+0	140aa, >tr|A0A329SWM8|A0A329SWM8_9STRA... *
+>Cluster 474
+0	140aa, >tr|G4YMZ7|G4YMZ7_PHYSP... *
+>Cluster 475
+0	140aa, >tr|G4Z9L7|G4Z9L7_PHYSP... *
+>Cluster 476
+0	140aa, >tr|G4ZUW9|G4ZUW9_PHYSP... *
+>Cluster 477
+0	140aa, >tr|G4ZYW8|G4ZYW8_PHYSP... *
+>Cluster 478
+0	139aa, >tr|Q572E3|Q572E3_PHYIN... *
+>Cluster 479
+0	139aa, >tr|A0A329SQ74|A0A329SQ74_9STRA... *
+>Cluster 480
+0	139aa, >tr|G4ZF61|G4ZF61_PHYSP... *
+>Cluster 481
+0	137aa, >Msp1... at 1:137:1:138/64.49%
+1	138aa, >Q0R411|PHI6417|Sm1... *
+2	136aa, >O74238|PHI3221|Sp1... at 3.16e-52/127aa/59.843%
+3	136aa, >Q8J0U4|PHI695|Sp1... at 5.99e-43/119aa/53.782%
+>Cluster 482
+0	138aa, >sp|P0CV34|RLR91_PLAVT... *
+>Cluster 483
+0	138aa, >tr|Q572H1|Q572H1_PHYIN... *
+>Cluster 484
+0	137aa, >Zt6... *
+>Cluster 485
+0	137aa, >RXLR22... *
+>Cluster 486
+0	137aa, >sp|A0A172M477|RLR67_PLAVT... *
+>Cluster 487
+0	137aa, >tr|A0A2H4X1W5|A0A2H4X1W5_9STRA... *
+>Cluster 488
+0	136aa, >OSP24... *
+>Cluster 489
+0	136aa, >tr|A0A329T0P2|A0A329T0P2_9STRA... *
+>Cluster 490
+0	136aa, >sp|A0A172M421|RLR10_PLAVT... *
+1	125aa, >tr|G4YE31|G4YE31_PHYSP... at 2.22e-16/115aa/33.043%
+>Cluster 491
+0	136aa, >sp|A0A172M490|RLR63_PLAVT... *
+>Cluster 492
+0	135aa, >AVR4_Cladosporium_fulvum... *
+>Cluster 493
+0	135aa, >D5KLB3... *
+>Cluster 494
+0	135aa, >sp|P0CU87|BRL08_BRELC... *
+>Cluster 495
+0	135aa, >tr|A0A329SB40|A0A329SB40_9STRA... *
+>Cluster 496
+0	134aa, >Ave1_Verticillium_dahliae_... *
+>Cluster 497
+0	134aa, >sp|G4ZBI3|AV238_PHYSP... *
+>Cluster 498
+0	129aa, >RXLR3... at 1:129:1:134/75.74%
+1	134aa, >tr|F6MEZ2|F6MEZ2_HYAAB... *
+>Cluster 499
+0	133aa, >tr|A0A329SYX8|A0A329SYX8_9STRA... *
+>Cluster 500
+0	132aa, >AvrSr50... *
+>Cluster 501
+0	132aa, >BAS107... *
+>Cluster 502
+0	132aa, >sp|P0CU88|BRL09_BRELC... *
+>Cluster 503
+0	132aa, >tr|D0NEI3|D0NEI3_PHYIT... *
+>Cluster 504
+0	132aa, >tr|A0A329S4B0|A0A329S4B0_9STRA... *
+>Cluster 505
+0	132aa, >tr|G4Z2R8|G4Z2R8_PHYSP... *
+>Cluster 506
+0	131aa, >Q5AA09|PHI3516|Pga26... *
+>Cluster 507
+0	131aa, >PaRXLR24... *
+>Cluster 508
+0	131aa, >tr|G5AD73|G5AD73_PHYSP... *
+>Cluster 509
+0	131aa, >sp|P0CV12|RLR45_PLAVT... *
+>Cluster 510
+0	131aa, >tr|A0A329SR95|A0A329SR95_9STRA... *
+>Cluster 511
+0	131aa, >tr|Q572I7|Q572I7_PHYIN... *
+>Cluster 512
+0	130aa, >AvrPm3... *
+>Cluster 513
+0	130aa, >AvrPm3... *
+>Cluster 514
+0	130aa, >BLN08... *
+1	95aa, >tr|D0N0X3|D0N0X3_PHYIT... at 1.37e-07/103aa/28.155%
+>Cluster 515
+0	130aa, >2_NFIP_OFITP_sp|A0A063CBJ7|SCRE2_USTVR... *
+>Cluster 516
+0	116aa, >PiAvr2a... at 1:116:15:130/88.79%
+1	130aa, >tr|A0A411HE94|A0A411HE94_PHYIN... *
+2	114aa, >Avr2b... at 8.03e-08/107aa/33.645%
+3	114aa, >tr|D0P4S6|D0P4S6_PHYIT... at 8.03e-08/107aa/33.645%,1:114:1:114/92.98%
+4	114aa, >tr|D0N3L4|D0N3L4_PHYIT... at 1.47e-09/117aa/35.897%
+>Cluster 517
+0	129aa, >Cce1... *
+>Cluster 518
+0	129aa, >RXLR6... *
+>Cluster 519
+0	129aa, >tr|F6MEZ9|F6MEZ9_HYAAB... *
+>Cluster 520
+0	129aa, >tr|Q572G3|Q572G3_PHYIN... *
+>Cluster 521
+0	129aa, >tr|D0NTF6|D0NTF6_PHYIT... *
+>Cluster 522
+0	129aa, >tr|D0NXW3|D0NXW3_PHYIT... *
+>Cluster 523
+0	128aa, >N1J904|PHI4622|Csep0105... *
+>Cluster 524
+0	128aa, >tr|Q572D6|Q572D6_PHYIN... *
+>Cluster 525
+0	128aa, >tr|G4Z9L0|G4Z9L0_PHYSP... *
+>Cluster 526
+0	128aa, >tr|Q572H7|Q572H7_PHYIN... *
+>Cluster 527
+0	128aa, >tr|Q572J4|Q572J4_PHYIN... *
+>Cluster 528
+0	127aa, >HaCR1... *
+>Cluster 529
+0	127aa, >tr|A0A329RS30|A0A329RS30_9STRA... *
+>Cluster 530
+0	127aa, >tr|D7PC71|D7PC71_PHYSO... *
+>Cluster 531
+0	127aa, >tr|A0A329RYQ8|A0A329RYQ8_9STRA... *
+>Cluster 532
+0	126aa, >EpiC1... *
+1	109aa, >tr|A0A0W8CD28|A0A0W8CD28_PHYNI... at 4.58e-16/113aa/46.903%
+>Cluster 533
+0	126aa, >CSEP0081... *
+>Cluster 534
+0	121aa, >Avr1a... at 1:118:1:119/76.47%
+1	126aa, >tr|A4LAA7|A4LAA7_PHYSO... *
+>Cluster 535
+0	126aa, >tr|D0MXC8|D0MXC8_PHYIT... *
+>Cluster 536
+0	126aa, >tr|G4YE58|G4YE58_PHYSP... *
+>Cluster 537
+0	126aa, >tr|G5A6F3|G5A6F3_PHYSP... *
+>Cluster 538
+0	126aa, >tr|Q572K8|Q572K8_PHYIN... *
+>Cluster 539
+0	125aa, >HaRxL36... *
+>Cluster 540
+0	125aa, >tr|Q572E0|Q572E0_PHYIN... *
+>Cluster 541
+0	125aa, >tr|Q572F5|Q572F5_PHYIN... *
+>Cluster 542
+0	125aa, >tr|D0NGY2|D0NGY2_PHYIT... *
+>Cluster 543
+0	124aa, >Zt80707... *
+>Cluster 544
+0	124aa, >tr|G4YHS3|G4YHS3_PHYSP... *
+>Cluster 545
+0	124aa, >tr|Q572E1|Q572E1_PHYIN... *
+>Cluster 546
+0	123aa, >PsAvr4_6... *
+>Cluster 547
+0	123aa, >sp|E0W5H5|AV262_PHYSO... *
+>Cluster 548
+0	122aa, >AVRA13_CSEP0372_Blumeria_graminis... *
+>Cluster 549
+0	122aa, >tr|N1JHK8|N1JHK8_BLUG1... *
+>Cluster 550
+0	122aa, >HaRxL18... *
+>Cluster 551
+0	122aa, >2_NFIP_OFITP_AEK80575.1... *
+1	122aa, >sp|G4ZSG0|AVH52_PHYSP... at 1:122:1:122/94.26%
+>Cluster 552
+0	122aa, >sp|P0CV26|RLR80_PLAVT... *
+>Cluster 553
+0	122aa, >tr|Q572E4|Q572E4_PHYIN... *
+>Cluster 554
+0	122aa, >tr|Q572E6|Q572E6_PHYIN... *
+>Cluster 555
+0	121aa, >AVR4E_Cladosporium_fulvum... *
+>Cluster 556
+0	121aa, >2_NFIP_OFITP_AEK86821.1... *
+>Cluster 557
+0	121aa, >2_NFIP_OFITP_AEK86830.1... *
+>Cluster 558
+0	121aa, >tr|G4YJ97|G4YJ97_PHYSP... *
+>Cluster 559
+0	121aa, >tr|A0A0M4CUF5|A0A0M4CUF5_9STRA... *
+>Cluster 560
+0	121aa, >tr|D0ND98|D0ND98_PHYIT... *
+>Cluster 561
+0	120aa, >PIIN_08944... *
+>Cluster 562
+0	120aa, >sp|A0A172M473|RLR29_PLAVT... *
+>Cluster 563
+0	120aa, >tr|D0NS77|D0NS77_PHYIT... *
+>Cluster 564
+0	119aa, >AvrPm2... *
+1	118aa, >BEC1054... at 1.60e-33/116aa/45.690%
+2	118aa, >BEC1011... at 6.04e-22/116aa/35.345%
+3	118aa, >BghBEC1011... at 6.04e-22/116aa/35.345%,1:118:1:118/100.00%
+4	103aa, >BEC1011... at 6.04e-22/116aa/35.345%,1:103:1:103/100.00%
+>Cluster 565
+0	119aa, >ECP4_Cladosporium_fulvum... *
+>Cluster 566
+0	119aa, >SIX5... *
+>Cluster 567
+0	119aa, >SrrPit2... *
+>Cluster 568
+0	119aa, >tr|A0A329S8V8|A0A329S8V8_9STRA... *
+>Cluster 569
+0	111aa, >Avr3a... at 1:111:1:109/85.59%
+1	119aa, >tr|G1AS86|G1AS86_PHYSO... *
+>Cluster 570
+0	118aa, >AVRa1... *
+>Cluster 571
+0	118aa, >BAS162... *
+>Cluster 572
+0	118aa, >Pit2_Ustilago_maydis... *
+>Cluster 573
+0	118aa, >Q01905|PHI111PHI760|Inf1... *
+>Cluster 574
+0	118aa, >AVRa10... *
+>Cluster 575
+0	118aa, >tr|D0N0R0|D0N0R0_PHYIT... *
+>Cluster 576
+0	118aa, >tr|Q572I0|Q572I0_PHYIN... *
+>Cluster 577
+0	118aa, >tr|A0A329SX39|A0A329SX39_9STRA... *
+>Cluster 578
+0	118aa, >tr|G3C9N9|G3C9N9_HYAAE... *
+>Cluster 579
+0	117aa, >AvrP123... *
+>Cluster 580
+0	117aa, >Tox1... *
+1	117aa, >A9JX75... at 1:117:1:117/98.29%
+>Cluster 581
+0	117aa, >tr|A0A329RC18|A0A329RC18_9STRA... *
+>Cluster 582
+0	116aa, >PstSCR1... *
+>Cluster 583
+0	116aa, >Ecp7... *
+>Cluster 584
+0	116aa, >sp|A0A172M416|RLR9_PLAVT... *
+>Cluster 585
+0	115aa, >ECP5_Cladosporium_fulvum... *
+>Cluster 586
+0	115aa, >BAS1... *
+>Cluster 587
+0	115aa, >NIP3... *
+>Cluster 588
+0	115aa, >CSEP0254... *
+>Cluster 589
+0	115aa, >RXLR21... *
+>Cluster 590
+0	115aa, >tr|A0A329SVG6|A0A329SVG6_9STRA... *
+>Cluster 591
+0	114aa, >SPD7... *
+>Cluster 592
+0	114aa, >SIX9... *
+>Cluster 593
+0	114aa, >N1JN67... *
+>Cluster 594
+0	114aa, >BghBEC3... *
+>Cluster 595
+0	114aa, >PsShr3... *
+>Cluster 596
+0	114aa, >HaRxL44... *
+1	93aa, >HaRxLL108... at 4.70e-14/77aa/48.052%
+>Cluster 597
+0	114aa, >tr|Q572K0|Q572K0_PHYIN... *
+>Cluster 598
+0	113aa, >BAS3... *
+>Cluster 599
+0	113aa, >AVR-Pik... *
+>Cluster 600
+0	113aa, >MoCDIP3... *
+>Cluster 601
+0	113aa, >tr|Q572F0|Q572F0_PHYIN... *
+>Cluster 602
+0	113aa, >tr|Q572I5|Q572I5_PHYIN... *
+>Cluster 603
+0	112aa, >P52751|PHI15|Mpg1... *
+>Cluster 604
+0	112aa, >AVRa7... *
+>Cluster 605
+0	112aa, >N1JJE7... *
+>Cluster 606
+0	112aa, >tr|Q572F7|Q572F7_PHYIN... *
+>Cluster 607
+0	111aa, >sp|P0CV27|RLR81_PLAVT... *
+>Cluster 608
+0	110aa, >O42720|PHI163PHI5046PHI7602|Cbp1... *
+>Cluster 609
+0	110aa, >SIX11... *
+>Cluster 610
+0	110aa, >MoHTR2... *
+>Cluster 611
+0	110aa, >Zt103264... *
+>Cluster 612
+0	110aa, >HaRxL62... *
+>Cluster 613
+0	110aa, >tr|G4ZN60|G4ZN60_PHYSP... *
+>Cluster 614
+0	110aa, >tr|Q572F9|Q572F9_PHYIN... *
+>Cluster 615
+0	110aa, >tr|Q572H8|Q572H8_PHYIN... *
+>Cluster 616
+0	109aa, >NIP2... *
+>Cluster 617
+0	109aa, >N1S7Y0... *
+>Cluster 618
+0	109aa, >tr|Q572F3|Q572F3_PHYIN... *
+>Cluster 619
+0	109aa, >tr|Q572G1|Q572G1_PHYIN... *
+>Cluster 620
+0	109aa, >tr|Q572K7|Q572K7_PHYIN... *
+>Cluster 621
+0	108aa, >AvrPiz-t... *
+>Cluster 622
+0	108aa, >MoSPD5... *
+>Cluster 623
+0	108aa, >tr|A0A2H4X1V3|A0A2H4X1V3_9STRA... *
+>Cluster 624
+0	107aa, >SIX12... *
+1	42aa, >FolSix12... at 8:42:2:36/94.29%
+>Cluster 625
+0	106aa, >tr|A0A329S298|A0A329S298_9STRA... *
+>Cluster 626
+0	105aa, >CSEP-07... *
+1	105aa, >CSEP-07... at 1:105:1:105/100.00%
+>Cluster 627
+0	105aa, >PsShr5... *
+>Cluster 628
+0	105aa, >tr|G4YDW7|G4YDW7_PHYSP... *
+>Cluster 629
+0	104aa, >PIIN_03211... *
+>Cluster 630
+0	103aa, >MgxLysM... *
+1	103aa, >LmAvrLm6... at 1:103:1:103/100.00%
+2	97aa, >Mg1lysm... at 2.91e-22/98aa/43.878%
+>Cluster 631
+0	104aa, >sp|P0CV17|RLR54_PLAVT... *
+>Cluster 632
+0	103aa, >Avr5_Cladosporium_fulvum... *
+>Cluster 633
+0	103aa, >Foa4... *
+>Cluster 634
+0	103aa, >CbNip1... *
+>Cluster 635
+0	103aa, >tr|Q572H9|Q572H9_PHYIN... *
+>Cluster 636
+0	103aa, >tr|D0NYQ7|D0NYQ7_PHYIT... *
+>Cluster 637
+0	103aa, >tr|Q572D8|Q572D8_PHYIN... *
+>Cluster 638
+0	102aa, >BAS2... *
+>Cluster 639
+0	102aa, >BAS4... *
+>Cluster 640
+0	102aa, >O94196|PHI458|Mhp1... *
+>Cluster 641
+0	102aa, >AVRa9... *
+>Cluster 642
+0	102aa, >tr|Q572J9|Q572J9_PHYIN... *
+>Cluster 643
+0	102aa, >sp|A0A182BSS4|RLR61_PLAVT... *
+>Cluster 644
+0	102aa, >tr|G4YED1|G4YED1_PHYSP... *
+>Cluster 645
+0	101aa, >tr|Q572I6|Q572I6_PHYIN... *
+>Cluster 646
+0	101aa, >sp|A0A182BSS5|RLR64_PLAVT... *
+>Cluster 647
+0	100aa, >Avrblb2... *
+1	100aa, >Avrblb2... at 1:100:1:100/95.00%
+>Cluster 648
+0	100aa, >tr|Q572H4|Q572H4_PHYIN... *
+>Cluster 649
+0	100aa, >tr|A0A2H4X1X4|A0A2H4X1X4_9STRA... *
+>Cluster 650
+0	100aa, >tr|D0NS93|D0NS93_PHYIT... *
+>Cluster 651
+0	100aa, >tr|Q572H6|Q572H6_PHYIN... *
+>Cluster 652
+0	99aa, >tr|A0A0M5ILE5|A0A0M5ILE5_9STRA... *
+>Cluster 653
+0	98aa, >tr|A7L813|A7L813_PHYSO... *
+>Cluster 654
+0	97aa, >sp|P0CU86|BRL05_BRELC... *
+>Cluster 655
+0	97aa, >tr|A0A090BFC6|A0A090BFC6_HYAAE... *
+>Cluster 656
+0	96aa, >ECP1_Cladosporium_fulvum... *
+>Cluster 657
+0	96aa, >F4RBY2... *
+>Cluster 658
+0	96aa, >tr|A0A0M4CJE7|A0A0M4CJE7_9STRA... *
+>Cluster 659
+0	95aa, >AvrP4... *
+>Cluster 660
+0	95aa, >AvrLm11_Leptosphaeria_maculans... *
+>Cluster 661
+0	92aa, >sp|P0CV00|RLR21_PLAVT... *
+>Cluster 662
+0	91aa, >AvrPi9... *
+>Cluster 663
+0	89aa, >Avr1-CO39... *
+>Cluster 664
+0	88aa, >PST_Pec6... *
+>Cluster 665
+0	88aa, >Six14... *
+>Cluster 666
+0	87aa, >ToxB... *
+>Cluster 667
+0	85aa, >AVR-Pia... *
+>Cluster 668
+0	85aa, >tr|A0A329RFF7|A0A329RFF7_9STRA... *
+>Cluster 669
+0	83aa, >SPD10... *
+>Cluster 670
+0	83aa, >tr|G3C9Q8|G3C9Q8_HYAAE... *
+>Cluster 671
+0	234aa, >L7NCR0|PHI8061|Pc129892... at 5:234:6:237/76.29%
+1	237aa, >NIP1... *
+>Cluster 672
+0	82aa, >AvrStb6... *
+>Cluster 673
+0	81aa, >tr|A0A329RDN1|A0A329RDN1_9STRA... *
+>Cluster 674
+0	81aa, >tr|A0A329SKY7|A0A329SKY7_9STRA... *
+>Cluster 675
+0	80aa, >Iug9... *
+>Cluster 676
+0	78aa, >AVR2_protein_Cladosporium_fulvum... *
+>Cluster 677
+0	77aa, >tr|A0A0W8DIL6|A0A0W8DIL6_PHYNI... *
+>Cluster 678
+0	76aa, >tr|D0NEI4|D0NEI4_PHYIT... *
+>Cluster 679
+0	75aa, >BghROPIP1... *
+>Cluster 680
+0	74aa, >AvrPib... *
+>Cluster 681
+0	74aa, >SPD4... *
+>Cluster 682
+0	74aa, >MISSP7.6... *
+>Cluster 683
+0	74aa, >CgDN3... *
+>Cluster 684
+0	73aa, >Q94FS7|PHI665|Pcf... *
+>Cluster 685
+0	72aa, >lug6... *
+>Cluster 686
+0	72aa, >MoHEG13... *
+>Cluster 687
+0	70aa, >AVR-Pii... *
+>Cluster 688
+0	68aa, >MISSP7... *
+>Cluster 689
+0	64aa, >SPD2... *
+>Cluster 690
+0	63aa, >AVR9_Cladosporium_fulvum... *
+>Cluster 691
+0	58aa, >HaRxL68... *
+>Cluster 692
+0	54aa, >MC69... *
+>Cluster 693
+0	52aa, >SPD9... *

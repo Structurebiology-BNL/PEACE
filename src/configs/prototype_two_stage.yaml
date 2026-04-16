@@ -1,0 +1,91 @@
+# Two-stage prototype contrastive training configuration.
+
+data:
+  pretraining_csv_path: src/data/csv_dataset/fungtion_dataset.csv
+  finetuning_csv_path: src/data/csv_dataset/fungtion_dataset.csv
+  embedding_dir: src/data/embeddings/prott5_dropout_variants_packed
+  results_dir: results/prototype_two_stage
+  label_config:
+    label_column: label
+    sequence_id_column: sequence_id
+
+features:
+  normalize: true
+  pooling_type: mean
+
+model:
+  type: simple
+  input_dim: 1024
+  dropout_rate: 0.3
+  contrastive_dim: 1024
+  encoder_hidden_dim: 512
+
+training:
+  batch_size: 512
+  num_folds: 5
+  threshold_method: recall_constrained
+  target_recall: 0.8
+  run_dir: null
+  use_variants: true
+  variant_sampling:
+    enabled: true
+    num_variants: 8
+    always_include_original: true
+  pretraining:
+    num_epochs: 25
+    learning_rate: 0.0005
+    weight_decay: 0.0003
+    warmup_epochs: 5
+    early_stopping_patience: 6
+    grad_clip_value: 2.0
+    contrastive_type: prototype
+    majority_class: 0
+    monitor_metric: loss
+    mode: min
+    prototype_loss_params:
+      temperature: 0.07
+      eps_pos: 0.15
+      eps_neg: 0.03
+      prototype_weight: 1.0
+      unsupervised_weight: 1.0
+      prototype_update_strategy: ema
+      prototype_momentum: 0.97
+    lr_scheduler:
+      scheduler_type: cosine
+      eta_min: 1e-6
+  finetuning:
+    num_epochs: 40
+    learning_rate: 1.0e-5
+    weight_decay: 1.0e-5
+    warmup_epochs: 5
+    early_stopping_patience: 8
+    grad_clip_value: 2.0
+    contrastive_type: prototype_ranking
+    majority_class: 0
+    monitor_metric: auprc
+    mode: max
+    prototype_loss_params:
+      temperature: 0.07
+      eps_pos: 0.15
+      eps_neg: 0.03
+      bce_weight: 1.0
+      scoring_temperature: 0.1
+      unsupervised_weight: 1.0
+      prototype_weight: 1.0
+      prototype_update_strategy: fixed
+      prototype_momentum: 0.995
+    lr_scheduler:
+      scheduler_type: plateau
+      min_lr: 1e-6
+      factor: 0.5
+      patience: 3
+
+output:
+  save_checkpoints: true
+  plot_training_curves: true
+
+hardware:
+  gpu_id: 1
+  random_seed: 42
+  deterministic: false
+  debug_logging: true

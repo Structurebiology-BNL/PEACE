@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling>=1.24.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "effector-bincls"
+version = "0.1.0"
+description = "Simple-only fungal effector binary classification workflows"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "torch>=2.2",
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "scikit-learn>=1.5",
+  "ml-collections>=0.1.1",
+  "pyyaml>=6.0.1",
+  "matplotlib>=3.8",
+  "umap-learn>=0.5.6",
+  "scipy>=1.12",
+  "tqdm>=4.66",
+  "optuna>=3.6",
+  "biopython>=1.83",
+  "transformers>=4.40",
+]
+
+[project.scripts]
+effector-bincls = "effector_bincls.cli:main"
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3",
+  "ruff>=0.6",
+  "mypy>=1.11",
+  "ipykernel>=6.29",
+]
+
+[tool.uv]
+package = true
+
+[tool.hatch.build]
+dev-mode-dirs = [".", "src"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/effector_bincls"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+markers = [
+  "smoke: smoke tests for train/eval/inference entrypoints",
+]
+
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+extend-exclude = ["src/data/dataset_construction"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
