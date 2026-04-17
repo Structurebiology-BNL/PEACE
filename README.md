@@ -24,17 +24,17 @@ PEACE combines three ideas:
 
 In the two-stage workflow, representation learning happens first, then classification is fine-tuned on top of that structure.
 
-For full model details, equations, and benchmarking context, see [`manuscript.tex`](manuscript.tex).
+For full model details, equations, and benchmarking context, see the citation below.
 
 ## Workflow Visualization
 
 ### End-to-end PEACE workflow
 
-![PEACE workflow](assets/peace_workflow.png)
+<img src="assets/peace_workflow.png" alt="PEACE workflow" width="60%">
 
 ### Prototype-aware contrastive learning intuition
 
-![Prototype-aware contrastive learning](assets/contrastive_learning.png)
+<img src="assets/contrastive_learning.png" alt="Prototype-aware contrastive learning" width="60%">
 
 ## Getting Started
 
@@ -95,10 +95,19 @@ Detailed guides:
 - `src/configs/`: example configs for reproducible runs
 - `docs/`: detailed workflow documentation
 
-## Manuscript
+## Citation
 
-This release accompanies the PEACE manuscript:
+This work is not yet published. Please use the following BibTeX placeholder for now:
 
-- **Title:** *PEACE: Prototype-aware Effector Analysis via Contrastive Embeddings*
-
-If you use this repository in research, please cite the manuscript.
+```bibtex
+@article{peace2026,
+  title   = {PEACE: Prototype-aware Effector Analysis via Contrastive Embeddings},
+  author  = {Dai, Xin and Lin, Yuewei and Yoo, Shinjae and Liu, Qun},
+  year    = {2026},
+  journal = {TBD},
+  volume  = {TBD},
+  number  = {TBD},
+  pages   = {TBD},
+  doi     = {TBD}
+}
+```
