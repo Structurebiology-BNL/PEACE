@@ -30,11 +30,11 @@ For full model details, equations, and benchmarking context, see the citation be
 
 ### End-to-end PEACE workflow
 
-<img src="assets/peace_workflow.png" alt="PEACE workflow" width="60%">
+<img src="assets/peace_workflow.png" alt="PEACE workflow" width="65%">
 
 ### Prototype-aware contrastive learning intuition
 
-<img src="assets/contrastive_learning.png" alt="Prototype-aware contrastive learning" width="60%">
+<img src="assets/contrastive_learning.png" alt="Prototype-aware contrastive learning" width="65%">
 
 ## Getting Started
 
