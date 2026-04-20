@@ -55,6 +55,28 @@ def test_notebook_uses_packed_embeddings_without_layer_idx_or_npz() -> None:
     assert "glob('*.npz')" not in source
 
 
+def test_notebook_setup_clones_public_repo_without_github_pat() -> None:
+    source = _notebook_source()
+
+    install_cmd = (
+        '[sys.executable, "-m", "pip", "install", "-e", ".", "sentencepiece"]'
+    )
+
+    assert "https://github.com/{REPO_OWNER}/{REPO_NAME}.git" in source
+    assert '["git", "clone", REPO_URL, str(REPO_DIR)]' in source
+    assert install_cmd in source
+
+    assert "_read_github_token" not in source
+    assert "_build_clone_url" not in source
+    assert "GITHUB_TOKEN" not in source
+    assert "github_token" not in source
+    assert "x-access-token" not in source
+    assert "google.colab import userdata" not in source
+    assert "urlsplit" not in source
+    assert "urlunsplit" not in source
+    assert "personal access token" not in source
+
+
 def test_extract_prott5_embeddings_writes_packed_dataset(
     monkeypatch, tmp_path: Path
 ) -> None:
