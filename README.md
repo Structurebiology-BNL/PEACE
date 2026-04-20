@@ -42,7 +42,8 @@ For full model details, equations, and benchmarking context, see the citation be
 
 If you prefer a low-code workflow, start with this notebook:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Structurebiology-BNL/effector_prediction_with_contrastive_learning/blob/main/notebooks/fungus_inference_colab.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](
+https://colab.research.google.com/github/Structurebiology-BNL/PEACE/blob/main/notebooks/fungus_inference_colab.ipynb)
 
 Notebook in this repo: [`notebooks/fungus_inference_colab.ipynb`](notebooks/fungus_inference_colab.ipynb)
 
