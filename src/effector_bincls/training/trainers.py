@@ -80,11 +80,14 @@ class BaselineTrainer(BaseTrainer):
             model.__class__.__name__,
         )
 
-    def compute_loss(self, outputs, labels, is_training=True):
+    def _extract_logits(self, outputs) -> torch.Tensor:
+        """Extract classification logits from a baseline model output."""
         if not torch.is_tensor(outputs):
             raise ValueError(f"Expected tensor logits from model, got {type(outputs)}")
+        return outputs
 
-        logits = outputs
+    def compute_loss(self, outputs, labels, is_training=True):
+        logits = self._extract_logits(outputs)
         if labels.dim() > 1:
             labels = labels.squeeze()
         if labels.dim() == 0:
@@ -129,11 +132,7 @@ class BaselineTrainer(BaseTrainer):
         metrics = {}
 
         try:
-            if not torch.is_tensor(outputs):
-                self.logger.warning("Expected logits tensor, got %s", type(outputs))
-                return metrics
-
-            logits = outputs
+            logits = self._extract_logits(outputs)
             if logits.dim() == 2 and logits.shape[1] == 1:
                 logits = logits.squeeze(1)
 
@@ -219,13 +218,7 @@ class BaselineTrainer(BaseTrainer):
 
         val_outputs = train_results["val_outputs"]
         val_labels = train_results["val_labels"]
-
-        if not torch.is_tensor(val_outputs):
-            raise ValueError(
-                f"Expected logits tensor from model, got {type(val_outputs)}"
-            )
-
-        val_logits = val_outputs
+        val_logits = self._extract_logits(val_outputs)
         if val_logits.dim() == 2 and val_logits.shape[1] == 1:
             val_logits = val_logits.squeeze(1)
 
