@@ -16,6 +16,7 @@ from effector_bincls.data import (
     DEFAULT_PARTITION_COLUMN,
     SimpleDataset,
     load_labeled_dataset,
+    open_packed_embedding_dataset,
     resolve_label_columns,
     validate_two_stage_dataset_pair,
 )
@@ -443,6 +444,75 @@ def create_baseline_data_loader_fn(
             csv_path,
             config,
             logger,
+        )
+
+    return data_loader_fn
+
+
+def create_contrastive_bce_data_loader_fn(
+    config: ConfigDict,
+    logger: logging.Logger | None = None,
+):
+    """Create deterministic multi-view folds for Contrastive-BCE training."""
+    if logger is None:
+        logger = logging.getLogger(__name__)
+    if not hasattr(config.data, "csv_path"):
+        raise ValueError("Configuration must specify data.csv_path")
+
+    requested_variants = int(config.training.variant_sampling.num_variants)
+    embeddings, _, _ = open_packed_embedding_dataset(config.data.embedding_dir)
+    available_variants = int(embeddings.shape[1])
+    if available_variants < requested_variants:
+        raise ValueError(
+            f"Packed embedding dataset contains {available_variants} variants but "
+            f"training.variant_sampling requests {requested_variants}."
+        )
+    del embeddings
+
+    csv_path = Path(config.data.csv_path)
+    label_config = getattr(config.data, "label_config", {})
+    sequence_id_column, label_column = resolve_label_columns(label_config)
+    df = load_labeled_dataset(
+        csv_path,
+        label_config=label_config,
+        required_partitions={"train", "test"},
+    )
+    train_df = df[df[DEFAULT_PARTITION_COLUMN] == "train"].copy()
+    if train_df.empty:
+        raise ValueError(f"No training data found in CSV: {csv_path}")
+
+    sequence_ids = train_df[sequence_id_column].tolist()
+    labels = train_df[label_column].tolist()
+    num_folds = config.training.num_folds
+    random_seed = config.hardware.random_seed
+    splitter = StratifiedKFold(
+        n_splits=num_folds,
+        shuffle=True,
+        random_state=random_seed,
+    )
+    fold_data = {
+        fold: (
+            [sequence_ids[index] for index in train_indices],
+            [sequence_ids[index] for index in validation_indices],
+        )
+        for fold, (train_indices, validation_indices) in enumerate(
+            splitter.split(sequence_ids, labels),
+            start=1,
+        )
+    }
+
+    def data_loader_fn(fold_number: int) -> tuple[DataLoader, DataLoader]:
+        if fold_number not in fold_data:
+            raise ValueError(f"Fold number must be between 1 and {num_folds}")
+        train_ids, validation_ids = fold_data[fold_number]
+        return create_data_loaders(
+            train_ids,
+            validation_ids,
+            csv_path,
+            config,
+            use_variants=True,
+            variant_sampling_config=config.training.variant_sampling,
+            logger=logger,
         )
 
     return data_loader_fn

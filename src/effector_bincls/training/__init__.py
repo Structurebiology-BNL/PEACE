@@ -1,5 +1,10 @@
 """Training entrypoints and validation helpers for effector binary classification."""
 
+from effector_bincls.training.contrastive_bce import (
+    validate_contrastive_bce_config,
+)
+from effector_bincls.training.contrastive_bce_cv import run_contrastive_bce_cv
+from effector_bincls.training.contrastive_bce_trainer import ContrastiveBCETrainer
 from effector_bincls.training.cross_validation import (
     run_baseline_cv,
     run_prototype_ranking_cv,
@@ -13,6 +18,7 @@ from effector_bincls.training.cv_utils import (
 )
 from effector_bincls.training.data import (
     create_baseline_data_loader_fn,
+    create_contrastive_bce_data_loader_fn,
     create_single_stage_data_loader_fn,
     create_two_stage_data_loader_fn,
     load_test_data,
@@ -42,12 +48,15 @@ from effector_bincls.training.validation import (
 
 __all__ = [
     "validate_baseline_training_config",
+    "validate_contrastive_bce_config",
     "validate_prototype_single_stage_config",
     "validate_prototype_two_stage_config",
     "run_baseline_cv",
+    "run_contrastive_bce_cv",
     "run_prototype_ranking_cv",
     "run_prototype_ranking_two_stage_cv",
     "create_baseline_data_loader_fn",
+    "create_contrastive_bce_data_loader_fn",
     "create_single_stage_data_loader_fn",
     "create_two_stage_data_loader_fn",
     "load_test_data",
@@ -57,6 +66,7 @@ __all__ = [
     "WarmupPlateauScheduler",
     "create_optimizer",
     "BaselineTrainer",
+    "ContrastiveBCETrainer",
     "PretrainTrainer",
     "PrototypeRankingTrainer",
     "ConSupPrototypeLoss",
