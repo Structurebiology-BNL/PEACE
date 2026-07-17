@@ -63,6 +63,7 @@ Common workflows:
 ```bash
 # Baseline training / evaluation / analysis
 uv run effector-bincls train-baseline --config src/configs/baseline_bce.yaml
+uv run effector-bincls train-contrastive-bce --config src/configs/contrastive_bce.yaml
 uv run effector-bincls evaluate-baseline --run_dir <run_dir> --test_csv <csv> --threshold_method youden
 uv run effector-bincls analyze-baseline --run_dir <run_dir>
 
@@ -79,6 +80,11 @@ Training and inference configs expect `data.embedding_dir` or `--embedding_dir` 
 - `embeddings.npy`: packed array with shape `[num_sequences, num_variants, embedding_dim]`
 - `sequence_ids.txt`: sequence IDs in row order
 - `metadata.json`: machine-readable metadata including `pooling_type` and `original_variant_index`
+
+`train-contrastive-bce` requires at least two packed variants per sequence. It
+uses the canonical variant for BCE classification and all sampled variants for
+dropout-view contrastive regularization. See the baseline guide for its model
+contract and memory scaling.
 
 Detailed guides:
 - [`docs/INFERENCE_GUIDE.md`](docs/INFERENCE_GUIDE.md)

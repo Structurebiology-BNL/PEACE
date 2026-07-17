@@ -12,6 +12,7 @@ PUBLIC_DOCS = [
 
 EXPECTED_PUBLIC_CONFIGS = {
     "baseline_bce.yaml",
+    "contrastive_bce.yaml",
     "prototype_single_stage.yaml",
     "prototype_two_stage.yaml",
 }
@@ -41,3 +42,10 @@ def test_public_docs_reference_only_existing_configs() -> None:
     assert referenced_config_names <= EXPECTED_PUBLIC_CONFIGS
     for config_name in referenced_config_names:
         assert (CONFIG_DIR / config_name).exists()
+
+
+def test_public_docs_document_contrastive_bce_workflow() -> None:
+    docs_text = "\n".join(path.read_text() for path in PUBLIC_DOCS)
+
+    assert "train-contrastive-bce" in docs_text
+    assert "src/configs/contrastive_bce.yaml" in docs_text
