@@ -5,6 +5,7 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+import torch
 import yaml
 from ml_collections import ConfigDict
 
@@ -16,7 +17,10 @@ from effector_bincls.training.contrastive_bce import (
 from effector_bincls.training.contrastive_bce import (
     validate_contrastive_bce_config,
 )
-from effector_bincls.training.data import create_contrastive_bce_data_loader_fn
+from effector_bincls.training.data import (
+    create_contrastive_bce_data_loader_fn,
+    load_test_data,
+)
 from effector_bincls.training.prototype_single import main as prototype_single_main
 from effector_bincls.training.prototype_two_stage import (
     main as prototype_two_stage_main,
@@ -232,6 +236,39 @@ def test_contrastive_bce_loader_rejects_too_few_packed_views(
 
     with pytest.raises(ValueError, match="contains 1 variants.*requests 2"):
         create_contrastive_bce_data_loader_fn(config)
+
+
+def test_contrastive_bce_test_loader_places_canonical_view_first(
+    tmp_path: Path,
+) -> None:
+    config = _valid_contrastive_bce_config(tmp_path)
+    Path(config.data.csv_path).write_text(
+        "sequence_id,label,partition\n"
+        "seq0,1,train\n"
+        "seq1,0,train\n"
+        "seq2,1,test\n"
+        "seq3,0,test\n"
+    )
+    embeddings = np.asarray(
+        [
+            [[100.0, 100.0, 100.0], [1.0, 1.0, 1.0]],
+            [[101.0, 101.0, 101.0], [2.0, 2.0, 2.0]],
+            [[102.0, 102.0, 102.0], [3.0, 3.0, 3.0]],
+            [[103.0, 103.0, 103.0], [4.0, 4.0, 4.0]],
+        ],
+        dtype=np.float32,
+    )
+    write_packed_embedding_dataset(
+        config.data.embedding_dir,
+        [f"seq{index}" for index in range(4)],
+        embeddings,
+        pooling_type="mean",
+        original_variant_index=1,
+    )
+
+    features, _ = next(iter(load_test_data(config)))
+
+    assert torch.equal(features[:, 0, :], torch.tensor([[3.0] * 3, [4.0] * 3]))
 
 
 def test_contrastive_bce_training_entrypoint_exports_main() -> None:

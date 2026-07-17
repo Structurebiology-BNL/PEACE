@@ -206,6 +206,37 @@ def make_baseline_config(
     }
 
 
+def make_contrastive_bce_config(
+    tmp_path: Path,
+    dataset_path: Path,
+    embedding_dir: Path,
+) -> dict[str, Any]:
+    config = make_baseline_config(tmp_path, dataset_path, embedding_dir)
+    config["data"]["results_dir"] = str(tmp_path / "contrastive_bce_results")
+    config["model"].update(
+        {
+            "use_contrastive": True,
+            "contrastive_dim": 3,
+        }
+    )
+    config["training"].update(
+        {
+            "loss_type": "contrastive_bce",
+            "bce_weight": 1.0,
+            "unsupervised_weight": 0.5,
+            "temperature": 0.07,
+            "use_variants": True,
+            "variant_sampling": {
+                "enabled": True,
+                "num_variants": 2,
+                "always_include_original": True,
+            },
+            "monitor_metric": "auprc",
+        }
+    )
+    return config
+
+
 def make_prototype_single_config(
     tmp_path: Path,
     dataset_path: Path,

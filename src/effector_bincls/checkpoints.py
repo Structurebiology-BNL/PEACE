@@ -48,6 +48,7 @@ def load_baseline_model(
         output_dim=config.model.output_dim,
         dropout_rate=config.model.dropout_rate,
         use_contrastive=getattr(config.model, "use_contrastive", False),
+        contrastive_dim=getattr(config.model, "contrastive_dim", 128),
         encoder_hidden_dim=getattr(config.model, "encoder_hidden_dim", None),
     ).to(device)
 

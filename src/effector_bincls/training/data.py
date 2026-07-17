@@ -69,11 +69,22 @@ def load_test_data(
         label_config=label_config,
         logger=logger,
     )
+    collate_fn = None
+    if (
+        use_variants
+        and getattr(config.training, "loss_type", None) == "contrastive_bce"
+    ):
+        collate_fn = create_variant_collate_fn(
+            config.training.variant_sampling,
+            getattr(config.hardware, "random_seed", 42),
+            dataset.original_variant_index,
+        )
     return DataLoader(
         dataset,
         batch_size=getattr(config.training, "batch_size", 32),
         shuffle=False,
         num_workers=getattr(config.hardware, "num_workers", 0),
+        collate_fn=collate_fn,
         pin_memory=True,
     )
 
