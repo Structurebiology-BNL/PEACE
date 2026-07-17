@@ -165,6 +165,13 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# Local manuscript and review materials (never publish)
+/data/
+/scripts/benchmarking/generate_manuscript_plots.sh
+/scripts/benchmarking/generate_publication_plots.py
+/tests/unit/scripts/test_generate_publication_plots_validation.py
+/docs/superpowers/plans/2026-07-09-two-ablation-study.md
+
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
