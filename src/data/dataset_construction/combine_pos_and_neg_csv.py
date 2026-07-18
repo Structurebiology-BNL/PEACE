@@ -1,7 +1,46 @@
-import pandas as pd
-import numpy as np
 import argparse
 import os
+
+import numpy as np
+import pandas as pd
+
+
+def build_pretraining_runtime_dataset(combined_df: pd.DataFrame) -> pd.DataFrame:
+    """Materialize the unique train/pretrain union for runtime pretraining."""
+    required_columns = {"sequence_id", "sequence", "label", "partition"}
+    missing_columns = sorted(required_columns - set(combined_df.columns))
+    if missing_columns:
+        raise ValueError(
+            f"Combined provenance dataset is missing columns: {missing_columns}."
+        )
+
+    duplicated = combined_df["sequence_id"].duplicated(keep=False)
+    identity_columns = [
+        column for column in combined_df.columns if column != "partition"
+    ]
+    for sequence_id, group in combined_df.loc[duplicated].groupby(
+        "sequence_id", sort=False
+    ):
+        memberships = group["partition"].tolist()
+        if len(group) != 2 or set(memberships) != {"train", "pretrain"}:
+            raise ValueError(
+                f"Repeated provenance sequence ID {sequence_id!r} must have exactly "
+                "one train and one pretrain membership; "
+                f"got {memberships}."
+            )
+        for column in identity_columns:
+            if group[column].nunique(dropna=False) != 1:
+                raise ValueError(
+                    f"Repeated provenance sequence ID {sequence_id!r} has "
+                    f"conflicting {column!r} values."
+                )
+
+    runtime_df = combined_df.loc[
+        combined_df["partition"].isin(["train", "pretrain"])
+    ].copy()
+    runtime_df = runtime_df.drop_duplicates(subset=["sequence_id"], keep="first")
+    runtime_df["partition"] = "train"
+    return runtime_df
 
 
 def split_and_combine_datasets(
@@ -39,7 +78,8 @@ def split_and_combine_datasets(
     # Infer positive train and test counts from the CSV
     if not set(["train", "test"]).issubset(set(positive_df["partition"].unique())):
         raise ValueError(
-            "Positive CSV must contain both 'train' and 'test' partitions in the 'partition' column."
+            "Positive CSV must contain both 'train' and 'test' partitions "
+            "in the 'partition' column."
         )
     positive_train_count = len(positive_df[positive_df["partition"] == "train"])
     positive_test_count = len(positive_df[positive_df["partition"] == "test"])
@@ -51,7 +91,7 @@ def split_and_combine_datasets(
     total_negative_needed = negative_test_count + negative_train_count
     total_negatives_available = len(negative_df)
 
-    print(f"\nDataset Statistics:")
+    print("\nDataset Statistics:")
     print(f"Positive sequences: {len(positive_df)}")
     print(f"  Train: {positive_train_count}")
     print(f"  Test: {positive_test_count}")
@@ -68,12 +108,13 @@ def split_and_combine_datasets(
     remaining_negatives = total_negatives_available - total_negative_needed
     negative_pretrain_only_count = remaining_negatives  # These go to pretrain only
 
-    print(f"\nNegative Sequence Allocation:")
+    print("\nNegative Sequence Allocation:")
     print(f"Test partition: {negative_test_count}")
     print(f"Train partition: {negative_train_count}")
     print(f"Pretrain-only partition: {negative_pretrain_only_count}")
     print(
-        f"Total pretrain (train + pretrain-only): {negative_train_count + negative_pretrain_only_count}"
+        "Total pretrain (train + pretrain-only): "
+        f"{negative_train_count + negative_pretrain_only_count}"
     )
 
     # Shuffle negative sequences
@@ -118,11 +159,9 @@ def split_and_combine_datasets(
     )
 
     # --- NEW LOGIC: Create Pretraining and Finetuning DataFrames ---
-    # Pretraining CSV: all 'pretrain' and 'train' partitions, relabel all as 'train', exclude 'test'
-    pretrain_df = combined_df[
-        combined_df["partition"].isin(["pretrain", "train"])
-    ].copy()
-    pretrain_df["partition"] = "train"  # relabel all as 'train'
+    # Pretraining CSV: all 'pretrain' and 'train' partitions, relabel all as
+    # 'train', exclude 'test'
+    pretrain_df = build_pretraining_runtime_dataset(combined_df)
     pretrain_df.to_csv(pretrain_output_path, index=False)
     print(f"\nPretraining CSV saved to: {pretrain_output_path}")
     print(f"  Total sequences: {len(pretrain_df)}")
@@ -151,7 +190,8 @@ def split_and_combine_datasets(
     # Warn if any 'pretrain' entries remain (should not happen)
     if "pretrain" in finetune_df["partition"].unique():
         print(
-            "WARNING: 'pretrain' entries found in finetuning CSV. These will be removed."
+            "WARNING: 'pretrain' entries found in finetuning CSV. "
+            "These will be removed."
         )
         finetune_df = finetune_df[finetune_df["partition"].isin(["train", "test"])]
     finetune_df.to_csv(finetune_output_path, index=False)
@@ -187,7 +227,10 @@ def verify_partition_relationships(df: pd.DataFrame) -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Combine positive and negative protein sequence CSVs into partitioned pretraining and finetuning datasets."
+        description=(
+            "Combine positive and negative protein sequence CSVs into partitioned "
+            "pretraining and finetuning datasets."
+        )
     )
     parser.add_argument(
         "--positive-csv", required=True, help="Path to positive CSV file"
@@ -222,7 +265,8 @@ def main():
         exit(1)
 
     print(
-        "🧬 Protein Sequence Dataset Splitting and Combining (Pretraining/Finetuning Mode)"
+        "🧬 Protein Sequence Dataset Splitting and Combining "
+        "(Pretraining/Finetuning Mode)"
     )
     print("=" * 60)
 
@@ -262,10 +306,12 @@ def main():
             ]
         )
         print(
-            f"Test set - Positive: {test_pos}, Negative: {test_neg}, Ratio: 1:{test_neg//test_pos if test_pos > 0 else 'N/A'}"
+            f"Test set - Positive: {test_pos}, Negative: {test_neg}, "
+            f"Ratio: 1:{test_neg // test_pos if test_pos > 0 else 'N/A'}"
         )
         print(
-            f"Train set - Positive: {train_pos}, Negative: {train_neg}, Ratio: 1:{train_neg//train_pos if train_pos > 0 else 'N/A'}"
+            f"Train set - Positive: {train_pos}, Negative: {train_neg}, "
+            f"Ratio: 1:{train_neg // train_pos if train_pos > 0 else 'N/A'}"
         )
         summary_stats = {
             "total_sequences": len(finetune_df),
@@ -274,7 +320,7 @@ def main():
             "test_sequences": len(finetune_df[finetune_df["partition"] == "test"]),
             "train_sequences": len(finetune_df[finetune_df["partition"] == "train"]),
         }
-        print(f"\n📈 Finetuning Summary Statistics:")
+        print("\n📈 Finetuning Summary Statistics:")
         for key, value in summary_stats.items():
             print(f"  {key.replace('_', ' ').title()}: {value:,}")
 

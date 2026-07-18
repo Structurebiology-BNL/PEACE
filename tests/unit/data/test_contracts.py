@@ -15,6 +15,10 @@ def _normalize_frame(df: pd.DataFrame) -> pd.DataFrame:
     return df.sort_values(["sequence_id", "partition"]).reset_index(drop=True)
 
 
+def _read_provenance_csv(path: Path) -> pd.DataFrame:
+    return pd.read_csv(path, dtype={"sequence_id": str})
+
+
 def test_supported_runtime_csvs_have_expected_schema_and_partitions() -> None:
     runtime_cases = [
         ("fungtion_dataset.csv", {"train", "test"}),
@@ -34,9 +38,8 @@ def test_supported_runtime_csvs_have_expected_schema_and_partitions() -> None:
 
 
 def test_provenance_construction_artifacts_explain_tracked_effector_datasets() -> None:
-    combined_positives = load_labeled_dataset(
-        DATA_ROOT / "dataset_construction" / "combined_positives.csv",
-        required_partitions={"train", "test", "pretrain"},
+    combined_positives = _read_provenance_csv(
+        DATA_ROOT / "dataset_construction" / "combined_positives.csv"
     )
     filtered_negatives = pd.read_csv(
         (
@@ -46,9 +49,8 @@ def test_provenance_construction_artifacts_explain_tracked_effector_datasets() -
         ),
         dtype={"sequence_id": str},
     )
-    effector_dataset = load_labeled_dataset(
-        DATA_ROOT / "csv_dataset" / "effector_dataset.csv",
-        required_partitions={"train", "test", "pretrain"},
+    effector_dataset = _read_provenance_csv(
+        DATA_ROOT / "csv_dataset" / "effector_dataset.csv"
     )
     effector_pretrain = load_labeled_dataset(
         DATA_ROOT / "csv_dataset" / "effector_pretrain_dataset.csv",
@@ -75,7 +77,33 @@ def test_provenance_construction_artifacts_explain_tracked_effector_datasets() -
     expected_pretrain = effector_dataset[
         effector_dataset["partition"].isin({"train", "pretrain"})
     ].copy()
+    repeated = expected_pretrain[
+        expected_pretrain["sequence_id"].duplicated(keep=False)
+    ]
+    identity_columns = [
+        column for column in expected_pretrain.columns if column != "partition"
+    ]
+    for _, group in repeated.groupby("sequence_id"):
+        assert set(group["partition"]) == {"train", "pretrain"}
+        assert all(
+            group[column].nunique(dropna=False) == 1 for column in identity_columns
+        )
+
+    expected_pretrain = expected_pretrain.drop_duplicates(
+        subset=["sequence_id"], keep="first"
+    )
     expected_pretrain["partition"] = "train"
+    assert expected_pretrain["sequence_id"].is_unique
+    assert set(
+        effector_finetune.loc[effector_finetune["partition"] == "train", "sequence_id"]
+    ).issubset(set(effector_pretrain["sequence_id"]))
+    assert set(effector_pretrain["sequence_id"]).isdisjoint(
+        set(
+            effector_finetune.loc[
+                effector_finetune["partition"] == "test", "sequence_id"
+            ]
+        )
+    )
     expected_pretrain = _normalize_frame(expected_pretrain)
     assert_frame_equal(
         expected_pretrain,
