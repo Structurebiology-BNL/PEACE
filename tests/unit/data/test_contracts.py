@@ -6,7 +6,10 @@ import pandas as pd
 import pytest
 from pandas.testing import assert_frame_equal
 
-from effector_bincls.data import load_labeled_dataset
+from effector_bincls.data import (
+    load_labeled_dataset,
+    validate_two_stage_dataset_pair,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DATA_ROOT = REPO_ROOT / "src" / "data"
@@ -64,6 +67,35 @@ def test_supported_runtime_csvs_have_expected_schema_and_partitions() -> None:
 
         assert {"sequence_id", "label", "partition"}.issubset(df.columns)
         assert required_partitions.issubset(set(df["partition"].unique()))
+
+
+def test_tracked_two_stage_runtime_pair_satisfies_alignment_contract() -> None:
+    pretraining_path = DATA_ROOT / "csv_dataset" / "effector_pretrain_dataset.csv"
+    finetuning_path = DATA_ROOT / "csv_dataset" / "effector_finetune_dataset.csv"
+    pretraining = load_labeled_dataset(
+        pretraining_path,
+        required_partitions={"train"},
+    )
+    finetuning = load_labeled_dataset(
+        finetuning_path,
+        required_partitions={"train", "test"},
+    )
+    pretraining_ids = set(pretraining["sequence_id"])
+    finetuning_train_ids = set(
+        finetuning.loc[finetuning["partition"] == "train", "sequence_id"]
+    )
+    finetuning_test_ids = set(
+        finetuning.loc[finetuning["partition"] == "test", "sequence_id"]
+    )
+
+    assert finetuning_train_ids.issubset(pretraining_ids)
+    assert finetuning_test_ids.isdisjoint(pretraining_ids)
+    validate_two_stage_dataset_pair(
+        pretraining,
+        finetuning,
+        pretraining_csv_path=pretraining_path,
+        finetuning_csv_path=finetuning_path,
+    )
 
 
 def test_provenance_membership_audit_rejects_repeated_test_ids() -> None:

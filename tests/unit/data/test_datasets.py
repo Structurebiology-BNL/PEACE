@@ -112,8 +112,8 @@ def test_validate_two_stage_dataset_pair_rejects_missing_samples_and_label_misma
         tmp_path / "finetuning.csv",
         [
             "seq0,1,train",
+            "seq9,0,train",
             "seq1,1,test",
-            "seq9,0,test",
         ],
     )
 
@@ -138,7 +138,8 @@ def test_validate_two_stage_dataset_pair_rejects_missing_samples_and_label_misma
         tmp_path / "finetuning.csv",
         [
             "seq0,1,train",
-            "seq1,1,test",
+            "seq1,1,train",
+            "seq2,1,test",
         ],
     )
     finetuning_df = load_labeled_dataset(
@@ -153,6 +154,34 @@ def test_validate_two_stage_dataset_pair_rejects_missing_samples_and_label_misma
             pretraining_csv_path=pretraining_csv,
             finetuning_csv_path=finetuning_csv,
         )
+
+
+def test_validate_two_stage_dataset_pair_allows_test_ids_absent_from_pretraining(
+    tmp_path: Path,
+) -> None:
+    pretraining_csv = _write_dataset_csv(
+        tmp_path / "pretraining.csv",
+        ["seq0,1,train", "seq1,0,train"],
+    )
+    finetuning_csv = _write_dataset_csv(
+        tmp_path / "finetuning.csv",
+        ["seq0,1,train", "seq1,0,train", "seq2,1,test", "seq3,0,test"],
+    )
+    pretraining_df = load_labeled_dataset(
+        pretraining_csv,
+        required_partitions={"train"},
+    )
+    finetuning_df = load_labeled_dataset(
+        finetuning_csv,
+        required_partitions={"train", "test"},
+    )
+
+    validate_two_stage_dataset_pair(
+        pretraining_df,
+        finetuning_df,
+        pretraining_csv_path=pretraining_csv,
+        finetuning_csv_path=finetuning_csv,
+    )
 
 
 def test_simple_dataset_rejects_missing_embeddings(tmp_path: Path) -> None:

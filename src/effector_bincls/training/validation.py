@@ -249,7 +249,12 @@ def validate_contrastive_bce_config(config: ConfigDict) -> None:
     for name in ("csv_path", "embedding_dir", "results_dir"):
         _require_non_empty_string(data, name, f"data.{name}")
     _require_bool(features, "normalize", "features.normalize")
-    _require_non_empty_string(features, "pooling_type", "features.pooling_type")
+    _require_choice(
+        features,
+        "pooling_type",
+        "features.pooling_type",
+        {"mean", "max", "bos", "eos"},
+    )
 
     _require_exact_integer(model, "output_dim", "model.output_dim", expected=1)
     _require_bool(

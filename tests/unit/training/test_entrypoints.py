@@ -134,7 +134,7 @@ def _assert_entrypoint_rejects_without_results(
     ("path", "value", "message"),
     [
         (("features", "normalize"), "false", "features.normalize must be boolean"),
-        (("features", "pooling_type"), "", "features.pooling_type must be non-empty"),
+        (("features", "pooling_type"), "", "features.pooling_type must be one of"),
         (("model", "type"), "simple", "model.type='simple_predictor'"),
         (("model", "output_dim"), 2, "model.output_dim=1"),
         (("model", "output_dim"), 1.0, "model.output_dim=1"),
@@ -449,6 +449,25 @@ def test_validate_contrastive_bce_inputs_accepts_complete_toy_data(
     config = _write_toy_dataset(tmp_path)
 
     validate_contrastive_bce_inputs(config)
+
+
+def test_contrastive_bce_entrypoint_rejects_unsupported_pooling_before_setup(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    config = _write_toy_dataset(tmp_path)
+    config.features.pooling_type = "median"
+    metadata_path = Path(config.data.embedding_dir) / "metadata.json"
+    metadata = json.loads(metadata_path.read_text())
+    metadata["pooling_type"] = "median"
+    metadata_path.write_text(json.dumps(metadata))
+
+    _assert_entrypoint_rejects_without_results(
+        monkeypatch,
+        tmp_path,
+        config,
+        r"features.pooling_type must be one of.*got 'median'",
+    )
 
 
 @pytest.mark.parametrize(

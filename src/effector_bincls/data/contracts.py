@@ -168,10 +168,13 @@ def validate_two_stage_dataset_pair(
             strict=False,
         )
     )
+    finetuning_train_df = finetuning_df[
+        finetuning_df[DEFAULT_PARTITION_COLUMN] == "train"
+    ]
     finetuning_labels = dict(
         zip(
-            finetuning_df[sequence_id_column],
-            finetuning_df[label_column],
+            finetuning_train_df[sequence_id_column],
+            finetuning_train_df[label_column],
             strict=False,
         )
     )
