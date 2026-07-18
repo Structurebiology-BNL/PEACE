@@ -14,6 +14,35 @@ def build_pretraining_runtime_dataset(combined_df: pd.DataFrame) -> pd.DataFrame
             f"Combined provenance dataset is missing columns: {missing_columns}."
         )
 
+    sequence_ids = combined_df["sequence_id"]
+    invalid_sequence_ids = sequence_ids.isna() | sequence_ids.map(
+        lambda value: isinstance(value, str) and not value.strip()
+    )
+    if invalid_sequence_ids.any():
+        positions = np.flatnonzero(invalid_sequence_ids.to_numpy()).tolist()[:5]
+        raise ValueError(
+            "Combined provenance dataset contains sequence IDs that are null or "
+            f"blank at row positions {positions} (showing up to 5)."
+        )
+
+    allowed_partitions = {"train", "pretrain", "test"}
+    invalid_partitions = ~combined_df["partition"].isin(allowed_partitions)
+    if invalid_partitions.any():
+        examples: list[str] = []
+        for value in combined_df.loc[invalid_partitions, "partition"]:
+            example = "<null>" if pd.isna(value) else repr(value)
+            if len(example) > 80:
+                example = f"{example[:77]}..."
+            if example not in examples:
+                examples.append(example)
+            if len(examples) == 5:
+                break
+        raise ValueError(
+            "Combined provenance dataset contains invalid partition values. "
+            "Use only 'train', 'pretrain', or 'test'; "
+            f"examples (up to 5): {examples}."
+        )
+
     duplicated = combined_df["sequence_id"].duplicated(keep=False)
     identity_columns = [
         column for column in combined_df.columns if column != "partition"

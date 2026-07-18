@@ -84,6 +84,11 @@ def test_provenance_construction_artifacts_explain_tracked_effector_datasets() -
         column for column in expected_pretrain.columns if column != "partition"
     ]
     for _, group in repeated.groupby("sequence_id"):
+        assert len(group) == 2
+        assert group["partition"].value_counts().to_dict() == {
+            "train": 1,
+            "pretrain": 1,
+        }
         assert set(group["partition"]) == {"train", "pretrain"}
         assert all(
             group[column].nunique(dropna=False) == 1 for column in identity_columns
