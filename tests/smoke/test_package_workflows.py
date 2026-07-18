@@ -9,6 +9,7 @@ from effector_bincls.analysis.prototype import main as prototype_analysis_main
 from effector_bincls.evaluation.baseline import main as baseline_evaluation_main
 from effector_bincls.evaluation.prototype import main as prototype_evaluation_main
 from effector_bincls.training.baseline import main as baseline_training_main
+from effector_bincls.training.contrastive_bce import main as contrastive_bce_main
 from effector_bincls.training.prototype_single import main as prototype_single_main
 from effector_bincls.training.prototype_two_stage import (
     main as prototype_two_stage_main,
@@ -19,6 +20,7 @@ from .conftest import (
     create_embedding_dir,
     latest_run_dir,
     make_baseline_config,
+    make_contrastive_bce_config,
     make_prototype_single_config,
     make_prototype_two_stage_config,
     write_config,
@@ -68,6 +70,45 @@ def test_baseline_package_workflow(monkeypatch, tmp_path) -> None:
     assert (run_dir / "results.yaml").exists()
     assert (run_dir / "test_evaluation.yaml").exists()
     assert (run_dir / "baseline_analysis" / "baseline_analysis_summary.json").exists()
+
+
+@pytest.mark.smoke
+def test_contrastive_bce_package_workflow(monkeypatch, tmp_path) -> None:
+    dataset_path = copy_binary_dataset(tmp_path)
+    embedding_dir = create_embedding_dir(tmp_path)
+    config_path = write_config(
+        make_contrastive_bce_config(tmp_path, dataset_path, embedding_dir),
+        tmp_path / "contrastive_bce.yml",
+    )
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["train-contrastive-bce", "--config", str(config_path)],
+    )
+    contrastive_bce_main()
+
+    run_dir = latest_run_dir(
+        tmp_path / "contrastive_bce_results",
+        "simple_predictor",
+    )
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "evaluate-baseline",
+            "--run_dir",
+            str(run_dir),
+            "--test_csv",
+            str(dataset_path),
+        ],
+    )
+    baseline_evaluation_main()
+
+    assert (run_dir / "results.yaml").exists()
+    assert (run_dir / "oof_predictions.npz").exists()
+    assert (run_dir / "fold_1" / "checkpoint.pt").exists()
+    assert (run_dir / "test_evaluation.yaml").exists()
 
 
 @pytest.mark.smoke

@@ -503,6 +503,15 @@ class BaseTrainer(ABC):
             return data.to(self.device)
         return data
 
+    @staticmethod
+    def _detach_output(output: Any) -> Any:
+        """Detach tensors recursively while preserving output containers."""
+        if torch.is_tensor(output):
+            return output.detach()
+        if isinstance(output, (tuple, list)):
+            return type(output)(BaseTrainer._detach_output(item) for item in output)
+        return output
+
     def _concatenate_outputs(self, all_outputs: list[Any]) -> Any:
         if not all_outputs:
             return None
@@ -667,10 +676,8 @@ class BaseTrainer(ABC):
                 if hasattr(self, "on_batch_end"):
                     self.on_batch_end(outputs, labels, batch_idx)
 
-                if torch.is_tensor(outputs):
-                    all_outputs.append(outputs.detach())
-                elif isinstance(outputs, (list, tuple)):
-                    all_outputs.append(outputs)
+                if torch.is_tensor(outputs) or isinstance(outputs, (list, tuple)):
+                    all_outputs.append(self._detach_output(outputs))
                 else:
                     raise ValueError(f"Unexpected output type: {type(outputs)}")
                 all_labels.append(labels)
@@ -754,7 +761,7 @@ class BaseTrainer(ABC):
                         loss_components["loss"] = 0.0
                     loss_components["loss"] += loss_output.item()
 
-                all_outputs.append(outputs)
+                all_outputs.append(self._detach_output(outputs))
                 all_labels.append(labels)
 
         concatenated_outputs = self._concatenate_outputs(all_outputs)

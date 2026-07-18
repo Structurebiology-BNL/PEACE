@@ -204,7 +204,12 @@ def main() -> None:
         logger.info("Using test CSV file: %s", args.test_csv)
 
         logger.info("Loading test data...")
-        test_loader = load_test_data(config, logger=logger, test_csv_path=args.test_csv)
+        test_loader = load_test_data(
+            config,
+            logger=logger,
+            test_csv_path=args.test_csv,
+            use_variants_override=False,
+        )
         test_labels = np.concatenate(
             [label.cpu().numpy() for _, label in test_loader]
         ).ravel()

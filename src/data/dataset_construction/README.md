@@ -71,8 +71,9 @@ The retained artifacts line up with the tracked CSVs as follows:
   `src/data/csv_dataset/effector_dataset.csv`
 - `filtered_new_negative_representatives.csv` explains all negative rows in
   `src/data/csv_dataset/effector_dataset.csv`
-- `effector_pretrain_dataset.csv` is the `train` plus `pretrain` portion of
-  `effector_dataset.csv`, with `partition` relabeled to `train`
+- `effector_pretrain_dataset.csv` contains one row per sequence in the unique
+  `train` plus `pretrain` union from `effector_dataset.csv`, with `partition`
+  relabeled to `train`
 - `effector_finetune_dataset.csv` is the `train` positives plus all `train` and
   `test` negatives plus all `test` rows from `effector_dataset.csv`
 
@@ -124,6 +125,9 @@ uv run python -m src.data.dataset_construction.filter_negatives_by_similarity \
 ```
 
 5. Regenerate the tracked effector CSV variants:
+
+The pretraining output contains one row per sequence in the unique
+`train`/`pretrain` membership union, with every output row relabeled to `train`.
 
 ```bash
 uv run python -m src.data.dataset_construction.combine_pos_and_neg_csv \

@@ -10,6 +10,24 @@ from numpy.typing import DTypeLike
 
 FORMAT_VERSION = 1
 LAYOUT = "variant"
+REQUIRED_METADATA_FIELDS = (
+    "format_version",
+    "layout",
+    "num_sequences",
+    "num_variants",
+    "embedding_dim",
+    "pooling_type",
+    "original_variant_index",
+    "dtype",
+)
+INTEGER_METADATA_FIELDS = (
+    "format_version",
+    "num_sequences",
+    "num_variants",
+    "embedding_dim",
+    "original_variant_index",
+)
+STRING_METADATA_FIELDS = ("layout", "pooling_type", "dtype")
 
 
 def _find_duplicate_ids(sequence_ids: list[str]) -> list[str]:
@@ -40,23 +58,59 @@ def _validate_metadata(
     embeddings: np.memmap,
     sequence_ids: list[str],
 ) -> None:
+    if not isinstance(metadata, dict):
+        raise ValueError("Packed embedding dataset metadata must be a JSON object.")
+
+    missing_fields = [
+        field_name
+        for field_name in REQUIRED_METADATA_FIELDS
+        if field_name not in metadata
+    ]
+    if missing_fields:
+        raise ValueError(
+            "Packed embedding dataset metadata is missing required fields: "
+            f"{missing_fields}."
+        )
+
+    for field_name in INTEGER_METADATA_FIELDS:
+        value = metadata[field_name]
+        if isinstance(value, bool) or not isinstance(value, int):
+            raise ValueError(
+                "Packed embedding dataset metadata "
+                f"{field_name} must be an integer, got {value!r}."
+            )
+
+    for field_name in STRING_METADATA_FIELDS:
+        value = metadata[field_name]
+        if not isinstance(value, str):
+            raise ValueError(
+                "Packed embedding dataset metadata "
+                f"{field_name} must be a string, got {value!r}."
+            )
+    for field_name in ("pooling_type", "dtype"):
+        value = metadata[field_name]
+        if not value.strip():
+            raise ValueError(
+                "Packed embedding dataset metadata "
+                f"{field_name} must be a non-empty string."
+            )
+
     duplicates = _find_duplicate_ids(sequence_ids)
     if duplicates:
         raise ValueError(f"Found duplicate sequence IDs: {duplicates}")
-    if metadata.get("format_version") != FORMAT_VERSION:
+    if metadata["format_version"] != FORMAT_VERSION:
         raise ValueError(
             "Packed embedding dataset has unsupported format_version: "
-            f"{metadata.get('format_version')}"
+            f"{metadata['format_version']}"
         )
-    if metadata.get("layout") != LAYOUT:
+    if metadata["layout"] != LAYOUT:
         raise ValueError(
             "Packed embedding dataset must use layout "
-            f"'{LAYOUT}', got {metadata.get('layout')!r}"
+            f"'{LAYOUT}', got {metadata['layout']!r}"
         )
     if embeddings.ndim != 3:
         raise ValueError(
-            "Packed embeddings must have shape [N, V, D]; "
-            f"received {embeddings.shape}"
+            f"Packed embeddings must have shape [N, V, D]; received {embeddings.shape}"
         )
     if len(sequence_ids) != embeddings.shape[0]:
         raise ValueError(
@@ -68,11 +122,34 @@ def _validate_metadata(
         "embedding_dim": embeddings.shape[2],
     }
     for field_name, expected_value in expected_counts.items():
-        if metadata.get(field_name) != expected_value:
+        if metadata[field_name] != expected_value:
             raise ValueError(
                 "Packed embedding dataset metadata "
-                f"{field_name} does not match array shape"
+                f"{field_name} does not match array shape: expected "
+                f"{expected_value}, got {metadata[field_name]}."
             )
+
+    original_variant_index = metadata["original_variant_index"]
+    if not 0 <= original_variant_index < embeddings.shape[1]:
+        raise ValueError(
+            "Packed embedding dataset metadata original_variant_index must be "
+            f"within the variant range [0, {embeddings.shape[1]}), got "
+            f"{original_variant_index}."
+        )
+
+    dtype_name = metadata["dtype"]
+    try:
+        metadata_dtype = np.dtype(dtype_name)
+    except (TypeError, ValueError):
+        raise ValueError(
+            f"Packed embedding dataset metadata dtype is invalid: {dtype_name!r}."
+        ) from None
+    if metadata_dtype != embeddings.dtype:
+        raise ValueError(
+            "Packed embedding dataset metadata dtype "
+            f"{dtype_name!r} does not match embeddings dtype "
+            f"{str(embeddings.dtype)!r}."
+        )
 
 
 def require_sequence_indices(

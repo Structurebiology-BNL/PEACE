@@ -54,6 +54,49 @@ def test_load_labeled_dataset_rejects_missing_required_partitions(
         load_labeled_dataset(csv_path, required_partitions={"train", "test"})
 
 
+@pytest.mark.parametrize(
+    ("rows", "message"),
+    [
+        ([",1,train"], "null or blank sequence IDs"),
+        (["   ,1,train"], "null or blank sequence IDs"),
+        (["seq0,,train"], "null labels"),
+        (["seq0,positive,train"], "numeric integer labels"),
+        (["seq0,0.5,train"], "numeric integer labels"),
+        (["seq0,2,train"], "labels outside \\{0, 1\\}"),
+        (["seq0,1,"], "null or blank partitions"),
+        (["seq0,1,   "], "null or blank partitions"),
+        (["seq0,1,train", "seq0,1,train"], "duplicate sequence IDs.*seq0"),
+        (["seq0,1,train", "seq0,0,test"], "duplicate sequence IDs.*seq0"),
+    ],
+)
+def test_load_labeled_dataset_rejects_invalid_runtime_values(
+    tmp_path: Path,
+    rows: list[str],
+    message: str,
+) -> None:
+    csv_path = _write_dataset_csv(tmp_path / "dataset.csv", rows)
+
+    with pytest.raises(ValueError, match=message):
+        load_labeled_dataset(csv_path)
+
+
+def test_load_labeled_dataset_accepts_unique_binary_runtime_rows(
+    tmp_path: Path,
+) -> None:
+    csv_path = _write_dataset_csv(
+        tmp_path / "dataset.csv",
+        ["seq0,1,train", "seq1,0,test"],
+    )
+
+    result = load_labeled_dataset(
+        csv_path,
+        required_partitions={"train", "test"},
+    )
+
+    assert result["sequence_id"].tolist() == ["seq0", "seq1"]
+    assert result["label"].tolist() == [1, 0]
+
+
 def test_validate_two_stage_dataset_pair_rejects_missing_samples_and_label_mismatches(
     tmp_path: Path,
 ) -> None:
@@ -69,8 +112,8 @@ def test_validate_two_stage_dataset_pair_rejects_missing_samples_and_label_misma
         tmp_path / "finetuning.csv",
         [
             "seq0,1,train",
+            "seq9,0,train",
             "seq1,1,test",
-            "seq9,0,test",
         ],
     )
 
@@ -95,7 +138,8 @@ def test_validate_two_stage_dataset_pair_rejects_missing_samples_and_label_misma
         tmp_path / "finetuning.csv",
         [
             "seq0,1,train",
-            "seq1,1,test",
+            "seq1,1,train",
+            "seq2,1,test",
         ],
     )
     finetuning_df = load_labeled_dataset(
@@ -104,6 +148,66 @@ def test_validate_two_stage_dataset_pair_rejects_missing_samples_and_label_misma
     )
 
     with pytest.raises(ValueError, match="Label inconsistencies detected"):
+        validate_two_stage_dataset_pair(
+            pretraining_df,
+            finetuning_df,
+            pretraining_csv_path=pretraining_csv,
+            finetuning_csv_path=finetuning_csv,
+        )
+
+
+def test_validate_two_stage_dataset_pair_allows_test_ids_absent_from_pretraining(
+    tmp_path: Path,
+) -> None:
+    pretraining_csv = _write_dataset_csv(
+        tmp_path / "pretraining.csv",
+        ["seq0,1,train", "seq1,0,train"],
+    )
+    finetuning_csv = _write_dataset_csv(
+        tmp_path / "finetuning.csv",
+        ["seq0,1,train", "seq1,0,train", "seq2,1,test", "seq3,0,test"],
+    )
+    pretraining_df = load_labeled_dataset(
+        pretraining_csv,
+        required_partitions={"train"},
+    )
+    finetuning_df = load_labeled_dataset(
+        finetuning_csv,
+        required_partitions={"train", "test"},
+    )
+
+    validate_two_stage_dataset_pair(
+        pretraining_df,
+        finetuning_df,
+        pretraining_csv_path=pretraining_csv,
+        finetuning_csv_path=finetuning_csv,
+    )
+
+
+def test_two_stage_pair_rejects_finetuning_train_id_only_in_pretraining_test(
+    tmp_path: Path,
+) -> None:
+    pretraining_csv = _write_dataset_csv(
+        tmp_path / "pretraining.csv",
+        ["seq0,1,train", "seq1,0,test"],
+    )
+    finetuning_csv = _write_dataset_csv(
+        tmp_path / "finetuning.csv",
+        ["seq0,1,train", "seq1,0,train", "seq2,1,test"],
+    )
+    pretraining_df = load_labeled_dataset(
+        pretraining_csv,
+        required_partitions={"train"},
+    )
+    finetuning_df = load_labeled_dataset(
+        finetuning_csv,
+        required_partitions={"train", "test"},
+    )
+
+    with pytest.raises(
+        ValueError,
+        match=r"samples not in pretraining dataset.*seq1.*finetuning\.csv",
+    ):
         validate_two_stage_dataset_pair(
             pretraining_df,
             finetuning_df,
@@ -253,6 +357,51 @@ def test_load_test_data_rejects_missing_test_embeddings(tmp_path: Path) -> None:
 
     with pytest.raises(FileNotFoundError, match="Missing embeddings"):
         load_test_data(config, test_csv_path=csv_path)
+
+
+def test_load_test_data_can_override_variant_config_for_canonical_evaluation(
+    tmp_path: Path,
+) -> None:
+    csv_path = _write_dataset_csv(
+        tmp_path / "dataset.csv",
+        ["seq0,1,train", "seq1,0,test"],
+    )
+    embedding_dir = _write_packed_embeddings(
+        tmp_path / "embeddings",
+        ["seq0", "seq1"],
+        np.asarray(
+            [
+                [[100.0, 100.0], [1.0, 1.0]],
+                [[200.0, 200.0], [2.0, 2.0]],
+            ],
+            dtype=np.float32,
+        ),
+        original_variant_index=1,
+    )
+    config = ConfigDict(
+        {
+            "data": {"csv_path": str(csv_path), "embedding_dir": str(embedding_dir)},
+            "features": {"normalize": False, "pooling_type": "mean"},
+            "model": {"type": "simple_predictor"},
+            "training": {
+                "batch_size": 2,
+                "use_variants": True,
+                "loss_type": "contrastive_bce",
+                "variant_sampling": {
+                    "enabled": True,
+                    "num_variants": 2,
+                    "always_include_original": True,
+                },
+            },
+            "hardware": {"num_workers": 0, "random_seed": 42},
+        }
+    )
+
+    features, labels = next(iter(load_test_data(config, use_variants_override=False)))
+
+    assert features.shape == (1, 2)
+    assert torch.equal(features, torch.tensor([[2.0, 2.0]]))
+    assert torch.equal(labels, torch.tensor([[0.0]]))
 
 
 def test_variant_collate_fn_includes_original_variant_index_when_sampling() -> None:

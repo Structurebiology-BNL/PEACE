@@ -3,9 +3,13 @@ from __future__ import annotations
 from pathlib import Path
 
 import pandas as pd
+import pytest
 from pandas.testing import assert_frame_equal
 
-from effector_bincls.data import load_labeled_dataset
+from effector_bincls.data import (
+    load_labeled_dataset,
+    validate_two_stage_dataset_pair,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DATA_ROOT = REPO_ROOT / "src" / "data"
@@ -13,6 +17,38 @@ DATA_ROOT = REPO_ROOT / "src" / "data"
 
 def _normalize_frame(df: pd.DataFrame) -> pd.DataFrame:
     return df.sort_values(["sequence_id", "partition"]).reset_index(drop=True)
+
+
+def _read_provenance_csv(path: Path) -> pd.DataFrame:
+    return pd.read_csv(path, dtype={"sequence_id": str})
+
+
+def _assert_valid_repeated_provenance_memberships(
+    provenance_df: pd.DataFrame,
+) -> None:
+    repeated = provenance_df[provenance_df["sequence_id"].duplicated(keep=False)]
+    identity_columns = [
+        column for column in provenance_df.columns if column != "partition"
+    ]
+    for sequence_id, group in repeated.groupby("sequence_id"):
+        assert len(group) == 2, (
+            f"Repeated provenance sequence ID {sequence_id!r} must have exactly "
+            "two rows."
+        )
+        membership_counts = group["partition"].value_counts().to_dict()
+        assert membership_counts == {
+            "train": 1,
+            "pretrain": 1,
+        }, (
+            f"Repeated provenance sequence ID {sequence_id!r} must have exactly "
+            "one train and one pretrain membership; "
+            f"got {membership_counts}."
+        )
+        for column in identity_columns:
+            assert group[column].nunique(dropna=False) == 1, (
+                f"Repeated provenance sequence ID {sequence_id!r} has "
+                f"conflicting {column!r} values."
+            )
 
 
 def test_supported_runtime_csvs_have_expected_schema_and_partitions() -> None:
@@ -33,10 +69,54 @@ def test_supported_runtime_csvs_have_expected_schema_and_partitions() -> None:
         assert required_partitions.issubset(set(df["partition"].unique()))
 
 
+def test_tracked_two_stage_runtime_pair_satisfies_alignment_contract() -> None:
+    pretraining_path = DATA_ROOT / "csv_dataset" / "effector_pretrain_dataset.csv"
+    finetuning_path = DATA_ROOT / "csv_dataset" / "effector_finetune_dataset.csv"
+    pretraining = load_labeled_dataset(
+        pretraining_path,
+        required_partitions={"train"},
+    )
+    finetuning = load_labeled_dataset(
+        finetuning_path,
+        required_partitions={"train", "test"},
+    )
+    pretraining_ids = set(pretraining["sequence_id"])
+    finetuning_train_ids = set(
+        finetuning.loc[finetuning["partition"] == "train", "sequence_id"]
+    )
+    finetuning_test_ids = set(
+        finetuning.loc[finetuning["partition"] == "test", "sequence_id"]
+    )
+
+    assert finetuning_train_ids.issubset(pretraining_ids)
+    assert finetuning_test_ids.isdisjoint(pretraining_ids)
+    validate_two_stage_dataset_pair(
+        pretraining,
+        finetuning,
+        pretraining_csv_path=pretraining_path,
+        finetuning_csv_path=finetuning_path,
+    )
+
+
+def test_provenance_membership_audit_rejects_repeated_test_ids() -> None:
+    provenance = pd.DataFrame(
+        [
+            ("duplicate-test", "AAA", 1, "test", 10),
+            ("duplicate-test", "AAA", 1, "test", 10),
+        ],
+        columns=["sequence_id", "sequence", "label", "partition", "cluster_id"],
+    )
+
+    with pytest.raises(
+        AssertionError,
+        match="duplicate-test.*exactly one train and one pretrain",
+    ):
+        _assert_valid_repeated_provenance_memberships(provenance)
+
+
 def test_provenance_construction_artifacts_explain_tracked_effector_datasets() -> None:
-    combined_positives = load_labeled_dataset(
-        DATA_ROOT / "dataset_construction" / "combined_positives.csv",
-        required_partitions={"train", "test", "pretrain"},
+    combined_positives = _read_provenance_csv(
+        DATA_ROOT / "dataset_construction" / "combined_positives.csv"
     )
     filtered_negatives = pd.read_csv(
         (
@@ -46,9 +126,8 @@ def test_provenance_construction_artifacts_explain_tracked_effector_datasets() -
         ),
         dtype={"sequence_id": str},
     )
-    effector_dataset = load_labeled_dataset(
-        DATA_ROOT / "csv_dataset" / "effector_dataset.csv",
-        required_partitions={"train", "test", "pretrain"},
+    effector_dataset = _read_provenance_csv(
+        DATA_ROOT / "csv_dataset" / "effector_dataset.csv"
     )
     effector_pretrain = load_labeled_dataset(
         DATA_ROOT / "csv_dataset" / "effector_pretrain_dataset.csv",
@@ -72,10 +151,25 @@ def test_provenance_construction_artifacts_explain_tracked_effector_datasets() -
     )
     assert len(effector_negative) == len(filtered_negatives)
 
+    _assert_valid_repeated_provenance_memberships(effector_dataset)
     expected_pretrain = effector_dataset[
         effector_dataset["partition"].isin({"train", "pretrain"})
     ].copy()
+    expected_pretrain = expected_pretrain.drop_duplicates(
+        subset=["sequence_id"], keep="first"
+    )
     expected_pretrain["partition"] = "train"
+    assert expected_pretrain["sequence_id"].is_unique
+    assert set(
+        effector_finetune.loc[effector_finetune["partition"] == "train", "sequence_id"]
+    ).issubset(set(effector_pretrain["sequence_id"]))
+    assert set(effector_pretrain["sequence_id"]).isdisjoint(
+        set(
+            effector_finetune.loc[
+                effector_finetune["partition"] == "test", "sequence_id"
+            ]
+        )
+    )
     expected_pretrain = _normalize_frame(expected_pretrain)
     assert_frame_equal(
         expected_pretrain,

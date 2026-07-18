@@ -32,6 +32,13 @@ For all retained prototype workflows, `data.embedding_dir` must point to a packe
 
 The packed array layout is `[num_sequences, num_variants, embedding_dim]`. `features.pooling_type` must match the packed dataset metadata. Legacy mmap-specific config fields such as `use_mmap` and `mmap_dir` are not part of the supported public contract. Some older saved configs may still carry those fields as historical artifacts, but the current runtime path ignores them.
 
+Prototype workflows use the same strict global labeled-runtime CSV contract:
+sequence IDs must be non-empty and globally unique, labels must be binary
+integers, and partitions must be non-empty. The complete packed-artifact
+preflight described for `train-contrastive-bce` in
+[BASELINE_README.md](BASELINE_README.md) belongs to that entrypoint; it does not
+change prototype single-stage or two-stage view semantics.
+
 ## Retained model
 
 Both flows use `SimplePredictor` with:

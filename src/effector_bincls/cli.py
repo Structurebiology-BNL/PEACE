@@ -12,6 +12,9 @@ from effector_bincls.evaluation.baseline import main as evaluate_baseline_main
 from effector_bincls.evaluation.prototype import main as evaluate_prototype_main
 from effector_bincls.inference.prototype import main as infer_prototype_main
 from effector_bincls.training.baseline import main as train_baseline_main
+from effector_bincls.training.contrastive_bce import (
+    main as train_contrastive_bce_main,
+)
 from effector_bincls.training.prototype_single import (
     main as train_prototype_single_main,
 )
@@ -23,6 +26,10 @@ COMMANDS: dict[str, tuple[Callable[[], None], str]] = {
     "train-baseline": (
         train_baseline_main,
         "Train the BCE baseline workflow",
+    ),
+    "train-contrastive-bce": (
+        train_contrastive_bce_main,
+        "Train the contrastive-BCE workflow",
     ),
     "train-prototype-single": (
         train_prototype_single_main,

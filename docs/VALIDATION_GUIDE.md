@@ -20,6 +20,26 @@ Both evaluators follow the same high-level pattern:
 
 The default threshold behavior is not a hardcoded `0.5`; it is derived from pooled OOF predictions unless you choose a different threshold method.
 
+Baseline evaluation always uses one canonical embedding per sequence, selected by
+the packed dataset's `original_variant_index`. A saved training config may enable
+variants for Contrastive-BCE regularization, but baseline test probabilities are
+not averaged across variants. Prototype evaluation retains its configured variant
+behavior.
+
+## Labeled Runtime CSV Contract
+
+Runtime labeled CSVs require non-empty unique sequence IDs, binary integer labels
+(`0` or `1`), and non-empty partitions. Duplicate IDs are rejected globally,
+including duplicates assigned to different partitions.
+
+The construction snapshot `effector_dataset.csv` is different: repeated
+`train`/`pretrain` rows encode membership provenance and are not a runtime input.
+`effector_pretrain_dataset.csv` materializes the unique union of those memberships,
+relabels every row to `train`, and remains a superset of the fine-tuning training
+set while remaining disjoint from the fine-tuning test set. Shared provenance
+memberships must agree on sequence, label, and retained metadata or construction
+fails.
+
 ## Direct Commands
 
 ### Baseline
