@@ -1,8 +1,5 @@
 """Training entrypoints and validation helpers for effector binary classification."""
 
-from effector_bincls.training.contrastive_bce import (
-    validate_contrastive_bce_config,
-)
 from effector_bincls.training.contrastive_bce_cv import run_contrastive_bce_cv
 from effector_bincls.training.contrastive_bce_trainer import ContrastiveBCETrainer
 from effector_bincls.training.cross_validation import (
@@ -42,6 +39,7 @@ from effector_bincls.training.trainers import (
 )
 from effector_bincls.training.validation import (
     validate_baseline_training_config,
+    validate_contrastive_bce_config,
     validate_prototype_single_stage_config,
     validate_prototype_two_stage_config,
 )

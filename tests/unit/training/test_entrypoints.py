@@ -10,6 +10,7 @@ import yaml
 from ml_collections import ConfigDict
 
 from effector_bincls.data import write_packed_embedding_dataset
+from effector_bincls.run_utils import load_config
 from effector_bincls.training.baseline import main as baseline_main
 from effector_bincls.training.contrastive_bce import (
     main as contrastive_bce_main,
@@ -56,7 +57,14 @@ def _valid_contrastive_bce_config(tmp_path: Path | None = None) -> ConfigDict:
             "training": {
                 "batch_size": 2,
                 "num_folds": 2,
-                "num_epochs": 1,
+                "threshold_method": "youden",
+                "target_recall": 0.85,
+                "num_epochs": 2,
+                "learning_rate": 1e-4,
+                "weight_decay": 0.01,
+                "warmup_epochs": 1,
+                "early_stopping_patience": 1,
+                "grad_clip_value": 2.0,
                 "loss_type": "contrastive_bce",
                 "bce_weight": 1.0,
                 "unsupervised_weight": 0.5,
@@ -67,9 +75,16 @@ def _valid_contrastive_bce_config(tmp_path: Path | None = None) -> ConfigDict:
                     "num_variants": 2,
                     "always_include_original": True,
                 },
+                "monitor_metric": "auprc",
+                "mode": "max",
+                "lr_scheduler": {
+                    "scheduler_type": "cosine",
+                    "eta_min": 1e-7,
+                },
             },
             "output": {
                 "save_checkpoints": False,
+                "plot_training_curves": False,
             },
             "hardware": {
                 "gpu_id": -1,
@@ -89,13 +104,43 @@ def _set_nested(config: dict, path: tuple[str, ...], value: object) -> None:
     section[path[-1]] = value
 
 
+def _assert_entrypoint_rejects_without_results(
+    monkeypatch,
+    tmp_path: Path,
+    config: ConfigDict,
+    message: str,
+    *,
+    results_dir: Path | None = None,
+) -> None:
+    config_path = tmp_path / "invalid.yml"
+    config_path.write_text(yaml.safe_dump(config.to_dict(), sort_keys=False))
+    expected_results_dir = results_dir or Path(config.data.results_dir)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["train-contrastive-bce", "--config", str(config_path)],
+    )
+
+    with pytest.raises((ValueError, FileNotFoundError), match=message):
+        contrastive_bce_main()
+
+    assert not expected_results_dir.exists()
+
+
 @pytest.mark.parametrize(
     ("path", "value", "message"),
     [
+        (("features", "normalize"), "false", "features.normalize must be boolean"),
+        (("features", "pooling_type"), "", "features.pooling_type must be non-empty"),
         (("model", "type"), "simple", "model.type='simple_predictor'"),
         (("model", "output_dim"), 2, "model.output_dim=1"),
         (("model", "output_dim"), 1.0, "model.output_dim=1"),
         (("model", "use_contrastive"), False, "use_contrastive=true"),
+        (
+            ("model", "dropout_rate"),
+            1.0,
+            r"model.dropout_rate must be in \[0, 1\)",
+        ),
         (("model", "input_dim"), 0, "model.input_dim must be a positive integer"),
         (
             ("model", "encoder_hidden_dim"),
@@ -117,6 +162,41 @@ def _set_nested(config: dict, path: tuple[str, ...], value: object) -> None:
             ("training", "num_epochs"),
             0,
             "training.num_epochs must be a positive integer",
+        ),
+        (
+            ("training", "learning_rate"),
+            0.0,
+            "training.learning_rate must be finite and > 0",
+        ),
+        (
+            ("training", "weight_decay"),
+            -0.1,
+            "training.weight_decay must be finite and >= 0",
+        ),
+        (
+            ("training", "warmup_epochs"),
+            3,
+            "training.warmup_epochs must not exceed training.num_epochs",
+        ),
+        (
+            ("training", "early_stopping_patience"),
+            0,
+            "training.early_stopping_patience must be a positive integer",
+        ),
+        (
+            ("training", "grad_clip_value"),
+            float("inf"),
+            "training.grad_clip_value must be finite and > 0",
+        ),
+        (
+            ("training", "threshold_method"),
+            "accuracy",
+            "training.threshold_method must be one of",
+        ),
+        (
+            ("training", "target_recall"),
+            1.1,
+            r"training.target_recall must be in \(0, 1\]",
         ),
         (("training", "loss_type"), "bce", "loss_type='contrastive_bce'"),
         (
@@ -151,44 +231,170 @@ def _set_nested(config: dict, path: tuple[str, ...], value: object) -> None:
             False,
             "always_include_original=true",
         ),
+        (
+            ("training", "monitor_metric"),
+            "accuracy",
+            "training.monitor_metric must be one of",
+        ),
+        (
+            ("training", "mode"),
+            "min",
+            "training.mode='max'.*monitor_metric='auprc'",
+        ),
+        (
+            ("training", "lr_scheduler", "scheduler_type"),
+            "linear",
+            "scheduler_type must be one of",
+        ),
+        (
+            ("training", "lr_scheduler", "eta_min"),
+            -1.0,
+            "eta_min must be finite and >= 0",
+        ),
+        (
+            ("output", "save_checkpoints"),
+            1,
+            "output.save_checkpoints must be boolean",
+        ),
+        (
+            ("hardware", "gpu_id"),
+            -2,
+            "hardware.gpu_id must be an integer >= -1",
+        ),
+        (
+            ("hardware", "random_seed"),
+            -1,
+            "hardware.random_seed must be an integer >= 0",
+        ),
+        (
+            ("hardware", "num_workers"),
+            -1,
+            "hardware.num_workers must be an integer >= 0",
+        ),
     ],
 )
-def test_validate_contrastive_bce_config_rejects_invalid_values(
+def test_contrastive_bce_entrypoint_rejects_invalid_config_before_setup(
+    monkeypatch,
+    tmp_path: Path,
     path: tuple[str, ...],
     value: object,
     message: str,
 ) -> None:
-    raw_config = _valid_contrastive_bce_config().to_dict()
+    raw_config = _valid_contrastive_bce_config(tmp_path).to_dict()
     _set_nested(raw_config, path, value)
-    config = ConfigDict(raw_config)
-
-    with pytest.raises(ValueError, match=message):
-        validate_contrastive_bce_config(config)
+    _assert_entrypoint_rejects_without_results(
+        monkeypatch,
+        tmp_path,
+        ConfigDict(raw_config),
+        message,
+    )
 
 
 def test_validate_contrastive_bce_config_accepts_valid_config() -> None:
     validate_contrastive_bce_config(_valid_contrastive_bce_config())
 
 
-def test_invalid_config_does_not_create_results_directory(
+def test_validate_contrastive_bce_config_accepts_shipped_public_config() -> None:
+    repo_root = Path(__file__).resolve().parents[3]
+    public_config = ConfigDict(
+        load_config(repo_root / "src/configs/contrastive_bce.yaml")
+    )
+
+    validate_contrastive_bce_config(public_config)
+
+
+@pytest.mark.parametrize(
+    "section",
+    ["data", "features", "model", "training", "output", "hardware"],
+)
+def test_contrastive_bce_entrypoint_requires_public_sections_before_setup(
     monkeypatch,
     tmp_path: Path,
+    section: str,
 ) -> None:
-    config = _valid_contrastive_bce_config(tmp_path)
-    config.training.temperature = 0.0
-    config_path = tmp_path / "invalid.yml"
-    config_path.write_text(yaml.safe_dump(config.to_dict(), sort_keys=False))
-    results_dir = Path(config.data.results_dir)
+    raw_config = _valid_contrastive_bce_config(tmp_path).to_dict()
+    results_dir = Path(raw_config["data"]["results_dir"])
+    del raw_config[section]
+    config_path = tmp_path / f"missing-{section}.yml"
+    config_path.write_text(yaml.safe_dump(raw_config, sort_keys=False))
     monkeypatch.setattr(
         sys,
         "argv",
         ["train-contrastive-bce", "--config", str(config_path)],
     )
 
-    with pytest.raises(ValueError, match="training.temperature"):
+    with pytest.raises(ValueError, match=f"requires a {section} section"):
         contrastive_bce_main()
 
     assert not results_dir.exists()
+
+
+def _delete_nested(config: dict, path: tuple[str, ...]) -> None:
+    section = config
+    for key in path[:-1]:
+        section = section[key]
+    del section[path[-1]]
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        ("data", "csv_path"),
+        ("data", "embedding_dir"),
+        ("data", "results_dir"),
+        ("features", "normalize"),
+        ("features", "pooling_type"),
+        ("model", "type"),
+        ("model", "input_dim"),
+        ("model", "output_dim"),
+        ("model", "dropout_rate"),
+        ("model", "use_contrastive"),
+        ("model", "contrastive_dim"),
+        ("model", "encoder_hidden_dim"),
+        ("training", "batch_size"),
+        ("training", "num_folds"),
+        ("training", "threshold_method"),
+        ("training", "target_recall"),
+        ("training", "num_epochs"),
+        ("training", "learning_rate"),
+        ("training", "weight_decay"),
+        ("training", "warmup_epochs"),
+        ("training", "early_stopping_patience"),
+        ("training", "grad_clip_value"),
+        ("training", "use_variants"),
+        ("training", "variant_sampling"),
+        ("training", "loss_type"),
+        ("training", "bce_weight"),
+        ("training", "unsupervised_weight"),
+        ("training", "temperature"),
+        ("training", "monitor_metric"),
+        ("training", "mode"),
+        ("training", "lr_scheduler"),
+        ("output", "save_checkpoints"),
+        ("output", "plot_training_curves"),
+        ("hardware", "gpu_id"),
+        ("hardware", "random_seed"),
+        ("hardware", "deterministic"),
+        ("hardware", "debug_logging"),
+        ("hardware", "num_workers"),
+    ],
+)
+def test_contrastive_bce_entrypoint_rejects_missing_fields_before_setup(
+    monkeypatch,
+    tmp_path: Path,
+    path: tuple[str, ...],
+) -> None:
+    raw_config = _valid_contrastive_bce_config(tmp_path).to_dict()
+    results_dir = Path(raw_config["data"]["results_dir"])
+    _delete_nested(raw_config, path)
+
+    _assert_entrypoint_rejects_without_results(
+        monkeypatch,
+        tmp_path,
+        ConfigDict(raw_config),
+        path[-1],
+        results_dir=results_dir,
+    )
 
 
 def _write_toy_dataset(tmp_path: Path, *, num_variants: int = 2) -> ConfigDict:

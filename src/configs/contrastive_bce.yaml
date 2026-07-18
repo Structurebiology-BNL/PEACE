@@ -42,7 +42,7 @@ training:
   mode: max
   lr_scheduler:
     scheduler_type: cosine
-    eta_min: 1e-7
+    eta_min: 1.0e-7
 
 output:
   save_checkpoints: true
