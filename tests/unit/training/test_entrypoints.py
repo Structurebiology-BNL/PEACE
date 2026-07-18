@@ -173,6 +173,12 @@ def _assert_entrypoint_rejects_without_results(
             -0.1,
             "training.weight_decay must be finite and >= 0",
         ),
+        pytest.param(
+            ("training", "weight_decay"),
+            10**400,
+            "training.weight_decay must be finite and >= 0",
+            id="oversized-numeric-scalar",
+        ),
         (
             ("training", "warmup_epochs"),
             3,
@@ -192,6 +198,18 @@ def _assert_entrypoint_rejects_without_results(
             ("training", "threshold_method"),
             "accuracy",
             "training.threshold_method must be one of",
+        ),
+        pytest.param(
+            ("training", "threshold_method"),
+            ["youden"],
+            "training.threshold_method must be one of",
+            id="enum-list-shape",
+        ),
+        pytest.param(
+            ("training", "threshold_method"),
+            {"name": "youden"},
+            "training.threshold_method must be one of",
+            id="enum-mapping-shape",
         ),
         (
             ("training", "target_recall"),

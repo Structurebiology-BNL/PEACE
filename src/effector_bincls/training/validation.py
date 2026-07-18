@@ -115,7 +115,10 @@ def _require_finite(
     )
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise ValueError(f"{requirement}, got {value!r}.")
-    numeric_value = float(value)
+    try:
+        numeric_value = float(value)
+    except OverflowError:
+        raise ValueError(f"{requirement}, got {value!r}.") from None
     invalid = not math.isfinite(numeric_value)
     if minimum is not None:
         invalid = invalid or (
@@ -137,7 +140,7 @@ def _require_choice(
     choices: set[str],
 ) -> str:
     value = getattr(section, name, None)
-    if value not in choices:
+    if not isinstance(value, str) or value not in choices:
         raise ValueError(
             f"{qualified_name} must be one of {sorted(choices)}, got {value!r}."
         )
