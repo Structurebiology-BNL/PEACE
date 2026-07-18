@@ -1512,7 +1512,7 @@ git commit -m "fix: evaluate baselines on canonical embeddings"
 - Modify: `src/data/dataset_construction/README.md`
 
 **Interfaces:**
-- Consumes: behavior implemented in Tasks 1–5 and the approved design spec at `docs/superpowers/specs/2026-07-18-contrastive-bce-contract-evaluation-design.md`.
+- Consumes: behavior implemented in Tasks 1–5 and the approved design spec at `docs/archive/superpowers/specs/2026-07-18-contrastive-bce-contract-evaluation-design.md`.
 - Produces: public documentation that distinguishes runtime uniqueness from provenance membership, enumerates preflight failures, and states the evaluation view rule.
 
 - [ ] **Step 1: Document runtime uniqueness and provenance membership**
