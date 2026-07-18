@@ -6,7 +6,14 @@ from typing import Any
 
 from ml_collections import ConfigDict
 
-from effector_bincls.data import load_labeled_dataset, validate_two_stage_dataset_pair
+from effector_bincls.data import (
+    DEFAULT_PARTITION_COLUMN,
+    load_labeled_dataset,
+    open_packed_embedding_dataset,
+    require_sequence_indices,
+    resolve_label_columns,
+    validate_two_stage_dataset_pair,
+)
 
 
 def _require_section(container: Any, name: str, context: str) -> Any:
@@ -426,6 +433,90 @@ def validate_contrastive_bce_config(config: ConfigDict) -> None:
         "hardware.num_workers",
         minimum=0,
     )
+
+
+def validate_contrastive_bce_inputs(config: ConfigDict) -> None:
+    """Validate runtime data and packed embeddings without creating run output."""
+    label_config = getattr(config.data, "label_config", {})
+    sequence_id_column, label_column = resolve_label_columns(label_config)
+    dataframe = load_labeled_dataset(
+        config.data.csv_path,
+        label_config=label_config,
+        required_partitions={"train", "test"},
+    )
+
+    required_rows = dataframe[
+        dataframe[DEFAULT_PARTITION_COLUMN].isin({"train", "test"})
+    ]
+    train_rows = required_rows[required_rows[DEFAULT_PARTITION_COLUMN] == "train"]
+    train_labels = set(train_rows[label_column].tolist())
+    if train_labels != {0, 1}:
+        raise ValueError(
+            "Contrastive-BCE train partition must contain both labels 0 and 1; "
+            f"got {sorted(train_labels)}."
+        )
+
+    class_counts = train_rows[label_column].value_counts()
+    num_folds = int(config.training.num_folds)
+    underfilled = {
+        int(label): int(class_counts.get(label, 0))
+        for label in (0, 1)
+        if int(class_counts.get(label, 0)) < num_folds
+    }
+    if underfilled:
+        raise ValueError(
+            f"Contrastive-BCE requires at least {num_folds} training samples per "
+            f"class for {num_folds}-fold stratification; got {underfilled}."
+        )
+
+    embeddings, available_ids, metadata = open_packed_embedding_dataset(
+        config.data.embedding_dir
+    )
+    available_variants = int(embeddings.shape[1])
+    embedding_dim = int(embeddings.shape[2])
+    requested_variants = int(config.training.variant_sampling.num_variants)
+    if metadata.get("pooling_type") != config.features.pooling_type:
+        raise ValueError(
+            "Packed embedding pooling_type "
+            f"{metadata.get('pooling_type')!r} does not match configured "
+            f"pooling_type {config.features.pooling_type!r}."
+        )
+    if embedding_dim != int(config.model.input_dim):
+        raise ValueError(
+            f"Packed embedding_dim {embedding_dim} does not match "
+            f"model.input_dim {config.model.input_dim}."
+        )
+    if available_variants < requested_variants:
+        raise ValueError(
+            f"Packed embedding dataset contains {available_variants} variants but "
+            f"training.variant_sampling requests {requested_variants}."
+        )
+
+    original_variant_index = metadata.get("original_variant_index")
+    if (
+        isinstance(original_variant_index, bool)
+        or not isinstance(original_variant_index, int)
+        or not 0 <= original_variant_index < available_variants
+    ):
+        raise ValueError(
+            "Packed embedding original_variant_index must be an integer within "
+            f"[0, {available_variants}); got {original_variant_index!r}."
+        )
+
+    requested_ids = required_rows[sequence_id_column].tolist()
+    available_id_set = set(available_ids)
+    missing_ids = [
+        sequence_id
+        for sequence_id in requested_ids
+        if sequence_id not in available_id_set
+    ]
+    if missing_ids:
+        raise FileNotFoundError(
+            "Packed embedding dataset is missing runtime sequence IDs: "
+            f"{missing_ids[:5]} ({len(missing_ids)} total)."
+        )
+    require_sequence_indices(requested_ids, available_ids)
+    del embeddings
 
 
 def validate_prototype_single_stage_config(config: ConfigDict) -> None:

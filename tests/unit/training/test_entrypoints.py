@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 import pytest
 import torch
 import yaml
@@ -26,6 +28,7 @@ from effector_bincls.training.prototype_single import main as prototype_single_m
 from effector_bincls.training.prototype_two_stage import (
     main as prototype_two_stage_main,
 )
+from effector_bincls.training.validation import validate_contrastive_bce_inputs
 
 
 def test_baseline_training_entrypoint_exports_main() -> None:
@@ -438,6 +441,155 @@ def _write_toy_dataset(tmp_path: Path, *, num_variants: int = 2) -> ConfigDict:
         original_variant_index=0,
     )
     return config
+
+
+def test_validate_contrastive_bce_inputs_accepts_complete_toy_data(
+    tmp_path: Path,
+) -> None:
+    config = _write_toy_dataset(tmp_path)
+
+    validate_contrastive_bce_inputs(config)
+
+
+@pytest.mark.parametrize(
+    ("invalid_kind", "message"),
+    [
+        ("duplicate", "duplicate sequence IDs.*seq0"),
+        ("nonbinary", "labels outside \\{0, 1\\}"),
+    ],
+)
+def test_contrastive_bce_entrypoint_rejects_invalid_runtime_csv_before_setup(
+    monkeypatch,
+    tmp_path: Path,
+    invalid_kind: str,
+    message: str,
+) -> None:
+    config = _write_toy_dataset(tmp_path)
+    dataframe = pd.read_csv(config.data.csv_path)
+    if invalid_kind == "duplicate":
+        dataframe = pd.concat([dataframe, dataframe.iloc[[0]]], ignore_index=True)
+    else:
+        dataframe.loc[0, "label"] = 2
+    dataframe.to_csv(config.data.csv_path, index=False)
+
+    _assert_entrypoint_rejects_without_results(
+        monkeypatch,
+        tmp_path,
+        config,
+        message,
+    )
+
+
+@pytest.mark.parametrize(
+    ("config_path", "value", "message"),
+    [
+        (("features", "pooling_type"), "max", "pooling_type.*mean.*max"),
+        (("model", "input_dim"), 4, "embedding_dim.*3.*4"),
+        (
+            ("training", "variant_sampling", "num_variants"),
+            3,
+            "contains 2 variants.*requests 3",
+        ),
+    ],
+)
+def test_validate_contrastive_bce_inputs_rejects_packed_contract_mismatch(
+    monkeypatch,
+    tmp_path: Path,
+    config_path: tuple[str, ...],
+    value: object,
+    message: str,
+) -> None:
+    raw_config = _write_toy_dataset(tmp_path).to_dict()
+    _set_nested(raw_config, config_path, value)
+    config = ConfigDict(raw_config)
+
+    _assert_entrypoint_rejects_without_results(
+        monkeypatch,
+        tmp_path,
+        config,
+        message,
+    )
+
+
+def test_validate_contrastive_bce_inputs_rejects_invalid_canonical_index(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    config = _write_toy_dataset(tmp_path)
+    metadata_path = Path(config.data.embedding_dir) / "metadata.json"
+    metadata = json.loads(metadata_path.read_text())
+    metadata["original_variant_index"] = 2
+    metadata_path.write_text(json.dumps(metadata))
+
+    _assert_entrypoint_rejects_without_results(
+        monkeypatch,
+        tmp_path,
+        config,
+        "original_variant_index.*2",
+    )
+
+
+def test_validate_contrastive_bce_inputs_requires_every_runtime_embedding(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    config = _write_toy_dataset(tmp_path)
+    sequence_ids_path = Path(config.data.embedding_dir) / "sequence_ids.txt"
+    sequence_ids_path.write_text("seq0\nseq1\nseq2\nseq3\nseq4\nmissing-id\n")
+
+    _assert_entrypoint_rejects_without_results(
+        monkeypatch,
+        tmp_path,
+        config,
+        "seq5",
+    )
+
+
+def test_validate_contrastive_bce_inputs_rejects_missing_packed_file(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    config = _write_toy_dataset(tmp_path)
+    (Path(config.data.embedding_dir) / "metadata.json").unlink()
+
+    _assert_entrypoint_rejects_without_results(
+        monkeypatch,
+        tmp_path,
+        config,
+        "metadata.json",
+    )
+
+
+def test_validate_contrastive_bce_inputs_requires_both_training_classes(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    config = _write_toy_dataset(tmp_path)
+    dataframe = pd.read_csv(config.data.csv_path)
+    dataframe.loc[dataframe["partition"] == "train", "label"] = 1
+    dataframe.to_csv(config.data.csv_path, index=False)
+
+    _assert_entrypoint_rejects_without_results(
+        monkeypatch,
+        tmp_path,
+        config,
+        "train partition.*both labels",
+    )
+
+
+def test_invalid_training_class_counts_do_not_create_results_directory(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    config = _write_toy_dataset(tmp_path)
+    config.training.num_folds = 3
+
+    _assert_entrypoint_rejects_without_results(
+        monkeypatch,
+        tmp_path,
+        config,
+        "at least 3 training samples per class",
+    )
 
 
 def test_contrastive_bce_loader_returns_multi_view_batches(tmp_path: Path) -> None:

@@ -40,6 +40,7 @@ from effector_bincls.training.trainers import (
 from effector_bincls.training.validation import (
     validate_baseline_training_config,
     validate_contrastive_bce_config,
+    validate_contrastive_bce_inputs,
     validate_prototype_single_stage_config,
     validate_prototype_two_stage_config,
 )
@@ -47,6 +48,7 @@ from effector_bincls.training.validation import (
 __all__ = [
     "validate_baseline_training_config",
     "validate_contrastive_bce_config",
+    "validate_contrastive_bce_inputs",
     "validate_prototype_single_stage_config",
     "validate_prototype_two_stage_config",
     "run_baseline_cv",

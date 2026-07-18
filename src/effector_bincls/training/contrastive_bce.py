@@ -17,7 +17,10 @@ from effector_bincls.run_utils import (
 )
 from effector_bincls.training.contrastive_bce_cv import run_contrastive_bce_cv
 from effector_bincls.training.data import create_contrastive_bce_data_loader_fn
-from effector_bincls.training.validation import validate_contrastive_bce_config
+from effector_bincls.training.validation import (
+    validate_contrastive_bce_config,
+    validate_contrastive_bce_inputs,
+)
 
 
 def main() -> None:
@@ -33,6 +36,7 @@ def main() -> None:
 
     preflight_config = ConfigDict(load_config(args.config))
     validate_contrastive_bce_config(preflight_config)
+    validate_contrastive_bce_inputs(preflight_config)
 
     start_time = time.time()
     config, run_dir, logger = setup_training(config_path=args.config)
