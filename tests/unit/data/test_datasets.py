@@ -184,6 +184,38 @@ def test_validate_two_stage_dataset_pair_allows_test_ids_absent_from_pretraining
     )
 
 
+def test_two_stage_pair_rejects_finetuning_train_id_only_in_pretraining_test(
+    tmp_path: Path,
+) -> None:
+    pretraining_csv = _write_dataset_csv(
+        tmp_path / "pretraining.csv",
+        ["seq0,1,train", "seq1,0,test"],
+    )
+    finetuning_csv = _write_dataset_csv(
+        tmp_path / "finetuning.csv",
+        ["seq0,1,train", "seq1,0,train", "seq2,1,test"],
+    )
+    pretraining_df = load_labeled_dataset(
+        pretraining_csv,
+        required_partitions={"train"},
+    )
+    finetuning_df = load_labeled_dataset(
+        finetuning_csv,
+        required_partitions={"train", "test"},
+    )
+
+    with pytest.raises(
+        ValueError,
+        match=r"samples not in pretraining dataset.*seq1.*finetuning\.csv",
+    ):
+        validate_two_stage_dataset_pair(
+            pretraining_df,
+            finetuning_df,
+            pretraining_csv_path=pretraining_csv,
+            finetuning_csv_path=finetuning_csv,
+        )
+
+
 def test_simple_dataset_rejects_missing_embeddings(tmp_path: Path) -> None:
     csv_path = _write_dataset_csv(
         tmp_path / "dataset.csv",

@@ -161,10 +161,13 @@ def validate_two_stage_dataset_pair(
     """Validate pretraining/finetuning dataset alignment for two-stage workflows."""
     sequence_id_column, label_column = resolve_label_columns(label_config)
 
+    pretraining_train_df = pretraining_df[
+        pretraining_df[DEFAULT_PARTITION_COLUMN] == "train"
+    ]
     pretraining_labels = dict(
         zip(
-            pretraining_df[sequence_id_column],
-            pretraining_df[label_column],
+            pretraining_train_df[sequence_id_column],
+            pretraining_train_df[label_column],
             strict=False,
         )
     )
