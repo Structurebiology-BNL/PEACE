@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pandas as pd
+import pytest
 from pandas.testing import assert_frame_equal
 
 from effector_bincls.data import load_labeled_dataset
@@ -17,6 +18,34 @@ def _normalize_frame(df: pd.DataFrame) -> pd.DataFrame:
 
 def _read_provenance_csv(path: Path) -> pd.DataFrame:
     return pd.read_csv(path, dtype={"sequence_id": str})
+
+
+def _assert_valid_repeated_provenance_memberships(
+    provenance_df: pd.DataFrame,
+) -> None:
+    repeated = provenance_df[provenance_df["sequence_id"].duplicated(keep=False)]
+    identity_columns = [
+        column for column in provenance_df.columns if column != "partition"
+    ]
+    for sequence_id, group in repeated.groupby("sequence_id"):
+        assert len(group) == 2, (
+            f"Repeated provenance sequence ID {sequence_id!r} must have exactly "
+            "two rows."
+        )
+        membership_counts = group["partition"].value_counts().to_dict()
+        assert membership_counts == {
+            "train": 1,
+            "pretrain": 1,
+        }, (
+            f"Repeated provenance sequence ID {sequence_id!r} must have exactly "
+            "one train and one pretrain membership; "
+            f"got {membership_counts}."
+        )
+        for column in identity_columns:
+            assert group[column].nunique(dropna=False) == 1, (
+                f"Repeated provenance sequence ID {sequence_id!r} has "
+                f"conflicting {column!r} values."
+            )
 
 
 def test_supported_runtime_csvs_have_expected_schema_and_partitions() -> None:
@@ -35,6 +64,22 @@ def test_supported_runtime_csvs_have_expected_schema_and_partitions() -> None:
 
         assert {"sequence_id", "label", "partition"}.issubset(df.columns)
         assert required_partitions.issubset(set(df["partition"].unique()))
+
+
+def test_provenance_membership_audit_rejects_repeated_test_ids() -> None:
+    provenance = pd.DataFrame(
+        [
+            ("duplicate-test", "AAA", 1, "test", 10),
+            ("duplicate-test", "AAA", 1, "test", 10),
+        ],
+        columns=["sequence_id", "sequence", "label", "partition", "cluster_id"],
+    )
+
+    with pytest.raises(
+        AssertionError,
+        match="duplicate-test.*exactly one train and one pretrain",
+    ):
+        _assert_valid_repeated_provenance_memberships(provenance)
 
 
 def test_provenance_construction_artifacts_explain_tracked_effector_datasets() -> None:
@@ -74,26 +119,10 @@ def test_provenance_construction_artifacts_explain_tracked_effector_datasets() -
     )
     assert len(effector_negative) == len(filtered_negatives)
 
+    _assert_valid_repeated_provenance_memberships(effector_dataset)
     expected_pretrain = effector_dataset[
         effector_dataset["partition"].isin({"train", "pretrain"})
     ].copy()
-    repeated = expected_pretrain[
-        expected_pretrain["sequence_id"].duplicated(keep=False)
-    ]
-    identity_columns = [
-        column for column in expected_pretrain.columns if column != "partition"
-    ]
-    for _, group in repeated.groupby("sequence_id"):
-        assert len(group) == 2
-        assert group["partition"].value_counts().to_dict() == {
-            "train": 1,
-            "pretrain": 1,
-        }
-        assert set(group["partition"]) == {"train", "pretrain"}
-        assert all(
-            group[column].nunique(dropna=False) == 1 for column in identity_columns
-        )
-
     expected_pretrain = expected_pretrain.drop_duplicates(
         subset=["sequence_id"], keep="first"
     )
