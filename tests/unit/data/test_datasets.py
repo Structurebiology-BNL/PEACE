@@ -54,6 +54,49 @@ def test_load_labeled_dataset_rejects_missing_required_partitions(
         load_labeled_dataset(csv_path, required_partitions={"train", "test"})
 
 
+@pytest.mark.parametrize(
+    ("rows", "message"),
+    [
+        ([",1,train"], "null or blank sequence IDs"),
+        (["   ,1,train"], "null or blank sequence IDs"),
+        (["seq0,,train"], "null labels"),
+        (["seq0,positive,train"], "numeric integer labels"),
+        (["seq0,0.5,train"], "numeric integer labels"),
+        (["seq0,2,train"], "labels outside \\{0, 1\\}"),
+        (["seq0,1,"], "null or blank partitions"),
+        (["seq0,1,   "], "null or blank partitions"),
+        (["seq0,1,train", "seq0,1,train"], "duplicate sequence IDs.*seq0"),
+        (["seq0,1,train", "seq0,0,test"], "duplicate sequence IDs.*seq0"),
+    ],
+)
+def test_load_labeled_dataset_rejects_invalid_runtime_values(
+    tmp_path: Path,
+    rows: list[str],
+    message: str,
+) -> None:
+    csv_path = _write_dataset_csv(tmp_path / "dataset.csv", rows)
+
+    with pytest.raises(ValueError, match=message):
+        load_labeled_dataset(csv_path)
+
+
+def test_load_labeled_dataset_accepts_unique_binary_runtime_rows(
+    tmp_path: Path,
+) -> None:
+    csv_path = _write_dataset_csv(
+        tmp_path / "dataset.csv",
+        ["seq0,1,train", "seq1,0,test"],
+    )
+
+    result = load_labeled_dataset(
+        csv_path,
+        required_partitions={"train", "test"},
+    )
+
+    assert result["sequence_id"].tolist() == ["seq0", "seq1"]
+    assert result["label"].tolist() == [1, 0]
+
+
 def test_validate_two_stage_dataset_pair_rejects_missing_samples_and_label_mismatches(
     tmp_path: Path,
 ) -> None:
