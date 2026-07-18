@@ -529,6 +529,39 @@ def test_validate_contrastive_bce_inputs_rejects_invalid_canonical_index(
     )
 
 
+@pytest.mark.parametrize(
+    ("field_name", "value", "message"),
+    [
+        ("format_version", True, "format_version.*integer"),
+        ("num_variants", 2.0, "num_variants.*integer"),
+        ("dtype", None, "missing required.*dtype"),
+        ("dtype", "float64", "dtype.*float64.*float32"),
+    ],
+)
+def test_contrastive_bce_entrypoint_rejects_malformed_packed_metadata_before_setup(
+    monkeypatch,
+    tmp_path: Path,
+    field_name: str,
+    value: object,
+    message: str,
+) -> None:
+    config = _write_toy_dataset(tmp_path)
+    metadata_path = Path(config.data.embedding_dir) / "metadata.json"
+    metadata = json.loads(metadata_path.read_text())
+    if value is None:
+        del metadata[field_name]
+    else:
+        metadata[field_name] = value
+    metadata_path.write_text(json.dumps(metadata))
+
+    _assert_entrypoint_rejects_without_results(
+        monkeypatch,
+        tmp_path,
+        config,
+        message,
+    )
+
+
 def test_validate_contrastive_bce_inputs_requires_every_runtime_embedding(
     monkeypatch,
     tmp_path: Path,

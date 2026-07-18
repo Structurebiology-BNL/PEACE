@@ -15,6 +15,28 @@ from effector_bincls.data.packed_embeddings import (
 )
 
 
+def _write_test_packed_dataset(tmp_path: Path) -> Path:
+    dataset_dir = tmp_path / "packed"
+    write_packed_embedding_dataset(
+        dataset_dir,
+        ["seq0"],
+        np.zeros((1, 2, 3), dtype=np.float32),
+        pooling_type="mean",
+    )
+    return dataset_dir
+
+
+def _replace_metadata_field(
+    dataset_dir: Path,
+    field_name: str,
+    value: object,
+) -> None:
+    metadata_path = dataset_dir / "metadata.json"
+    metadata = json.loads(metadata_path.read_text())
+    metadata[field_name] = value
+    metadata_path.write_text(json.dumps(metadata))
+
+
 def test_write_and_open_packed_embedding_dataset_round_trips(
     tmp_path: Path,
 ) -> None:
@@ -215,6 +237,99 @@ def test_open_packed_embedding_dataset_rejects_unsupported_format_version(
     )
 
     with pytest.raises(ValueError, match="unsupported format_version"):
+        open_packed_embedding_dataset(dataset_dir)
+
+
+@pytest.mark.parametrize(
+    "field_name",
+    [
+        "format_version",
+        "layout",
+        "num_sequences",
+        "num_variants",
+        "embedding_dim",
+        "pooling_type",
+        "original_variant_index",
+        "dtype",
+    ],
+)
+def test_open_packed_embedding_dataset_requires_every_metadata_field(
+    tmp_path: Path,
+    field_name: str,
+) -> None:
+    dataset_dir = _write_test_packed_dataset(tmp_path)
+    metadata_path = dataset_dir / "metadata.json"
+    metadata = json.loads(metadata_path.read_text())
+    del metadata[field_name]
+    metadata_path.write_text(json.dumps(metadata))
+
+    with pytest.raises(ValueError, match=f"missing required.*{field_name}"):
+        open_packed_embedding_dataset(dataset_dir)
+
+
+@pytest.mark.parametrize(
+    ("field_name", "value", "expected_type"),
+    [
+        ("format_version", True, "integer"),
+        ("num_sequences", 1.0, "integer"),
+        ("num_variants", True, "integer"),
+        ("embedding_dim", 3.0, "integer"),
+        ("original_variant_index", False, "integer"),
+        ("layout", 1, "string"),
+        ("pooling_type", 1, "string"),
+        ("dtype", 1, "string"),
+    ],
+)
+def test_open_packed_embedding_dataset_rejects_wrong_metadata_types(
+    tmp_path: Path,
+    field_name: str,
+    value: object,
+    expected_type: str,
+) -> None:
+    dataset_dir = _write_test_packed_dataset(tmp_path)
+    _replace_metadata_field(dataset_dir, field_name, value)
+
+    with pytest.raises(ValueError, match=f"{field_name}.*{expected_type}"):
+        open_packed_embedding_dataset(dataset_dir)
+
+
+@pytest.mark.parametrize("field_name", ["pooling_type", "dtype"])
+def test_open_packed_embedding_dataset_rejects_empty_metadata_strings(
+    tmp_path: Path,
+    field_name: str,
+) -> None:
+    dataset_dir = _write_test_packed_dataset(tmp_path)
+    _replace_metadata_field(dataset_dir, field_name, "")
+
+    with pytest.raises(ValueError, match=f"{field_name}.*non-empty"):
+        open_packed_embedding_dataset(dataset_dir)
+
+
+@pytest.mark.parametrize("original_variant_index", [-1, 2])
+def test_open_packed_embedding_dataset_rejects_invalid_original_variant_index(
+    tmp_path: Path,
+    original_variant_index: int,
+) -> None:
+    dataset_dir = _write_test_packed_dataset(tmp_path)
+    _replace_metadata_field(
+        dataset_dir,
+        "original_variant_index",
+        original_variant_index,
+    )
+
+    with pytest.raises(ValueError, match="original_variant_index.*variant range"):
+        open_packed_embedding_dataset(dataset_dir)
+
+
+@pytest.mark.parametrize("dtype", ["not-a-dtype", "float64"])
+def test_open_packed_embedding_dataset_rejects_invalid_or_mismatched_dtype(
+    tmp_path: Path,
+    dtype: str,
+) -> None:
+    dataset_dir = _write_test_packed_dataset(tmp_path)
+    _replace_metadata_field(dataset_dir, "dtype", dtype)
+
+    with pytest.raises(ValueError, match=f"dtype.*{dtype}"):
         open_packed_embedding_dataset(dataset_dir)
 
 
