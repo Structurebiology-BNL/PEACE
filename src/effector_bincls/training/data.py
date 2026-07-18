@@ -26,6 +26,8 @@ def load_test_data(
     config: ConfigDict,
     logger: logging.Logger | None = None,
     test_csv_path: Optional[Path] = None,
+    *,
+    use_variants_override: bool | None = None,
 ) -> DataLoader:
     """Load test data for package-native evaluation and analysis."""
     if logger is None:
@@ -58,7 +60,11 @@ def load_test_data(
             "'simple_predictor' and 'simple'."
         )
 
-    use_variants = getattr(config.training, "use_variants", False)
+    use_variants = (
+        getattr(config.training, "use_variants", False)
+        if use_variants_override is None
+        else use_variants_override
+    )
     dataset = SimpleDataset(
         embedding_dir=config.data.embedding_dir,
         csv_path=str(csv_path),

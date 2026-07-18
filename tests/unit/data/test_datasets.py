@@ -298,6 +298,51 @@ def test_load_test_data_rejects_missing_test_embeddings(tmp_path: Path) -> None:
         load_test_data(config, test_csv_path=csv_path)
 
 
+def test_load_test_data_can_override_variant_config_for_canonical_evaluation(
+    tmp_path: Path,
+) -> None:
+    csv_path = _write_dataset_csv(
+        tmp_path / "dataset.csv",
+        ["seq0,1,train", "seq1,0,test"],
+    )
+    embedding_dir = _write_packed_embeddings(
+        tmp_path / "embeddings",
+        ["seq0", "seq1"],
+        np.asarray(
+            [
+                [[100.0, 100.0], [1.0, 1.0]],
+                [[200.0, 200.0], [2.0, 2.0]],
+            ],
+            dtype=np.float32,
+        ),
+        original_variant_index=1,
+    )
+    config = ConfigDict(
+        {
+            "data": {"csv_path": str(csv_path), "embedding_dir": str(embedding_dir)},
+            "features": {"normalize": False, "pooling_type": "mean"},
+            "model": {"type": "simple_predictor"},
+            "training": {
+                "batch_size": 2,
+                "use_variants": True,
+                "loss_type": "contrastive_bce",
+                "variant_sampling": {
+                    "enabled": True,
+                    "num_variants": 2,
+                    "always_include_original": True,
+                },
+            },
+            "hardware": {"num_workers": 0, "random_seed": 42},
+        }
+    )
+
+    features, labels = next(iter(load_test_data(config, use_variants_override=False)))
+
+    assert features.shape == (1, 2)
+    assert torch.equal(features, torch.tensor([[2.0, 2.0]]))
+    assert torch.equal(labels, torch.tensor([[0.0]]))
+
+
 def test_variant_collate_fn_includes_original_variant_index_when_sampling() -> None:
     collate_fn = create_variant_collate_fn(
         {
