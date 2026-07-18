@@ -86,6 +86,18 @@ uses the canonical variant for BCE classification and all sampled variants for
 dropout-view contrastive regularization. See the baseline guide for its model
 contract and memory scaling.
 
+Runtime labeled CSVs require non-empty unique sequence IDs, binary integer labels
+(`0` or `1`), and non-empty partitions. Duplicate IDs are rejected globally,
+including duplicates assigned to different partitions.
+
+The construction snapshot `effector_dataset.csv` is different: repeated
+`train`/`pretrain` rows encode membership provenance and are not a runtime input.
+`effector_pretrain_dataset.csv` materializes the unique union of those memberships,
+relabels every row to `train`, and remains a superset of the fine-tuning training
+set while remaining disjoint from the fine-tuning test set. Shared provenance
+memberships must agree on sequence, label, and retained metadata or construction
+fails.
+
 Detailed guides:
 - [`docs/INFERENCE_GUIDE.md`](docs/INFERENCE_GUIDE.md)
 - [`docs/VALIDATION_GUIDE.md`](docs/VALIDATION_GUIDE.md)

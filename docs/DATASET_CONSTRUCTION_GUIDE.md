@@ -179,6 +179,20 @@ Important output:
 - `combined_positives.csv`
 - `filtered_new_negative_representatives.csv`
 
+### Runtime uniqueness and provenance membership
+
+Runtime labeled CSVs require non-empty unique sequence IDs, binary integer labels
+(`0` or `1`), and non-empty partitions. Duplicate IDs are rejected globally,
+including duplicates assigned to different partitions.
+
+The construction snapshot `effector_dataset.csv` is different: repeated
+`train`/`pretrain` rows encode membership provenance and are not a runtime input.
+`effector_pretrain_dataset.csv` materializes the unique union of those memberships,
+relabels every row to `train`, and remains a superset of the fine-tuning training
+set while remaining disjoint from the fine-tuning test set. Shared provenance
+memberships must agree on sequence, label, and retained metadata or construction
+fails.
+
 ### Why there are three tracked CSVs
 
 #### `effector_dataset.csv`
@@ -194,7 +208,8 @@ Treat it as provenance-first. It is not the main documented runtime input.
 
 This is the representation-learning view of the data:
 
-- includes original `train` and `pretrain`
+- contains one row per sequence in the unique union of original `train` and
+  `pretrain` memberships
 - relabels both partitions to `train`
 - excludes `test`
 
@@ -282,4 +297,3 @@ If you are working on dataset provenance or release packaging:
   evidence for the tracked effector benchmark
 - treat `effector_dataset.csv` as provenance-only unless you are explicitly
   re-running the construction logic
-

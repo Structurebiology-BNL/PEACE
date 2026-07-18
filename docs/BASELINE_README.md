@@ -33,9 +33,16 @@ prototype-distance scoring, or PEACE's two-stage optimization.
 
 The config requires a packed embedding dataset with at least two variants,
 `training.variant_sampling.always_include_original: true`, and a positive
-finite contrastive temperature and loss weights. Invalid configurations fail
-before a run directory is created. The public config is deterministic with
-`hardware.random_seed: 42` and `hardware.deterministic: true`.
+finite contrastive temperature and loss weights. The public config is
+deterministic with `hardware.random_seed: 42` and
+`hardware.deterministic: true`.
+
+Before a run directory is created, `train-contrastive-bce` validates the complete
+configuration, runtime CSV contract, required train/test partitions, both training
+classes, per-class support for stratified folds, packed pooling and
+dimensionality, requested variant count, canonical variant metadata, and embedding
+coverage for every train/test ID. Invalid or ambiguous input fails without leaving
+a partial run directory.
 
 Contrastive-BCE produces baseline-compatible fold checkpoints, pooled OOF
 predictions, and thresholds. Evaluate a saved run with:
@@ -95,6 +102,12 @@ Outputs are written under `results/.../simple_predictor/run_<timestamp>_seed<see
 2. Finds a global threshold.
 3. Loads each fold checkpoint.
 4. Runs ensemble test inference with simple averaging.
+
+Baseline evaluation always uses one canonical embedding per sequence, selected by
+the packed dataset's `original_variant_index`. A saved training config may enable
+variants for Contrastive-BCE regularization, but baseline test probabilities are
+not averaged across variants. Prototype evaluation retains its configured variant
+behavior.
 
 Example:
 
